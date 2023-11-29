@@ -1,0 +1,28 @@
+<!-- Atualizado folder.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagens na Pasta - {{ folder_name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Imagens na Pasta - {{ folder_name }}</h1>
+
+    <a href="{{ url_for('index') }}">Voltar para a página inicial</a>
+
+    <h2>Imagens:</h2>
+
+    {% if images %}
+        <div class="image-container">
+            {% for image in images %}
+                <img src="{{ url_for('view_image', folder_name=folder_name, image_name=image) }}" alt="{{ image }}">
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Nenhuma imagem nesta pasta.</p>
+    {% endif %}
+</body>
+</html>

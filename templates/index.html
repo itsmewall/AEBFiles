@@ -1,0 +1,107 @@
+<!-- Atualizado index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AEB | Arquivos</title>
+    <style>
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <form action="/create_folder" method="post">
+        <label for="folder_name">Nova Pasta:</label>
+        <input type="text" id="folder_name" name="folder_name" required>
+        <button type="submit">Criar Pasta</button>
+    </form>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Escolha um arquivo:</label>
+        <input type="file" id="file" name="file" accept="image/*" required>
+        
+        <label for="folder">Selecione uma Pasta:</label>
+        <select id="folder" name="folder" required>
+            {% for folder in folders %}
+                <option value="{{ folder }}">{{ folder }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <h2>Pastas:</h2>
+    <ul>
+        {% for folder in folders %}
+            <li><a href="{{ url_for('show_folder', folder_name=folder) }}">{{ folder }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

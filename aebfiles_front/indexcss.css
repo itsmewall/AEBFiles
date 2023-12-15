@@ -1,0 +1,62 @@
+body{
+    /* padding: 0; */
+    /* margin: 0; */
+    background-color: black;
+
+}
+.carrossel{
+    display: flex;
+    margin-top: 1%;
+    height: 50vh;
+    background-color: white;
+    border-radius: 20px;
+}
+.navegador{
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    padding: 2% 5%;
+    border-radius: 20px;
+}
+a{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 25px;
+}
+.barra_de_pesquisa{
+    display: flex;
+    justify-content: center;
+
+}
+.pastas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+}
+
+.card {
+    width: 25%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin:10px 2% 0% 2%;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.foto {
+    display: flex;
+    margin: 10px 10px 0px ;
+    height: 100px;
+    text-align: center;
+    background-color: rgb(56, 8, 228);
+    border-radius: 20px;
+}
+
+.card div:last-child {
+    flex: 0;
+    text-align: center;
+    padding: 10px;
+}

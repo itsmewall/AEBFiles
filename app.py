@@ -1,3 +1,4 @@
+import random
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import os
 from werkzeug.utils import secure_filename
@@ -16,10 +17,46 @@ def compress_image(image_path):
     img = Image.open(image_path)
     img.save(image_path, quality=85) 
 
-@app.route('/')
-def index():
+def get_first_image_from_random_folder():
     folders = [folder for folder in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isdir(os.path.join(app.config['UPLOAD_FOLDER'], folder))]
-    return render_template('index.html', folders=folders)
+
+    if not folders:
+        return None
+
+    random_folder = random.choice(folders)
+    folder_path = os.path.join(app.config['UPLOAD_FOLDER'], random_folder)
+    images = [img for img in os.listdir(folder_path) if img.lower().endswith(('png', 'jpg', 'jpeg', 'gif'))]
+
+    if images:
+        first_image = images[0]
+        return {'folder': random_folder, 'image': first_image}
+    else:
+        return None
+
+
+@app.route('/')
+def publicIndex():
+    folders = [folder for folder in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isdir(os.path.join(app.config['UPLOAD_FOLDER'], folder))]
+    
+    # Get random folder and image
+    random_folder, random_image = get_first_image_from_random_folder()
+    
+    # Create a dictionary to store image paths for each folder
+    folder_images = {}
+    for folder in folders:
+        folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder)
+        images = os.listdir(folder_path)
+        folder_images[folder] = images
+
+    # Add the function to the template context
+    app.jinja_env.globals.update(get_first_image_from_random_folder=get_first_image_from_random_folder)
+
+    return render_template('publicIndex.html', folders=folders, folder_images=folder_images, random_folder=random_folder, random_image=random_image)
+
+@app.route('/admin')
+def adminIndex():
+    folders = [folder for folder in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isdir(os.path.join(app.config['UPLOAD_FOLDER'], folder))]
+    return render_template('adminIndex.html', folders=folders)
 
 @app.route('/folder/<folder_name>')
 def show_folder(folder_name):
@@ -35,7 +72,7 @@ def create_folder():
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
 
-    return redirect(url_for('index'))
+    return redirect(url_for('adminIndex'))
 
 
 @app.route('/upload', methods=['POST'])
@@ -65,7 +102,7 @@ def upload_file():
         if file.filename.lower().endswith(('png', 'jpg', 'jpeg', 'gif')):
             compress_image(file_path)
 
-    return redirect(url_for('index'))
+    return redirect(url_for('adminIndex'))
 
 @app.route('/view/<folder_name>/<image_name>')
 def view_image(folder_name, image_name):

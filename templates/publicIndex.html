@@ -3,224 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/carrossel.css') }}">
     <title>AEB Files</title>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: black;
-            color: white;
-            position: relative;
-            overflow-x: hidden;
-        }
-        
-        header {
+       .scroll-arrow {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 2;
-            background-color: transparent;
-            padding: 20px;
-            text-align: center;
-            font-family: Orbitron, sans-serif;
-            text-transform: uppercase;
-            display: flex;
-            justify-content: space-between; /* Espaçamento entre os itens */
-            align-items: center;
-        }
-
-        .main {
-            overflow-x: hidden;
-            padding-top: 60px; 
-        }
-
-        .background-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .logo-container {
-            margin-left: 20px;
-            font-family: Orbitron, sans-serif;
-            flex: 1; 
-        }
-
-        .menu-icon {
-            margin-right: 20px;
+            bottom: 20px;
+            right: 50%;
             cursor: pointer;
-        }
-
-        .logo {
-            width: 100px;
-            height: auto;
-        }
-
-        .navbar {
-            background: transparent;
-            justify-content: center; 
-            align-items: center; 
-            flex: 1;
-        }
-
-        .navbar a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            right: 0;
-            background-color: #111;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-
-        .sidebar a {
-            padding: 15px 25px;
-            text-decoration: none;
-            font-size: 18px;
-            color: white;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidebar a:hover {
-            background-color: #444;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 0;
-            left: 25px;
-            font-size: 36px;
-            margin-right: 50px;
-            cursor: pointer;
-        }
-
-        .carrossel {
-            position: relative;
-            width: 100vw;
-            max-width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .carousel-container {
-            display: flex;
-            transition: transform 2s ease-in-out;
-        }
-
-        .carousel-item {
-            min-width: 100%;
-            height: 100%;
-            overflow: hidden;
-            position: relative;
-            transition: transform 2s ease-in-out;
-        }
-
-        .zoomable {
-            transition: transform 3s ease-in-out;
-        }
-
-        .zoomable:hover {
-            transform: scale(1.03);
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .pastas {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            width: 100%;
-            margin: 2% 0;
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .card {
-            width: 25%;
-            height: 10%;
-            display: flex;
-            flex-direction: column;
-            margin: 10px 2% 0% 2%;
-            border-radius: 20px;
-            background-color: white;
-        }
-
-        .card p {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            font-size: 12px;
-        }
-
-        .foto {
-            display: flex;
-            margin: 10px 10px 0px;
-            height: 100px;
-            text-align: center;
-            background-color: rgb(56, 8, 228);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .foto img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .card div:last-child {
-            flex: 0;
-            text-align: center;
-            padding: 10px;
+            animation: bounce 3s infinite;
         }
 
         .material-icons {
-            font-size: 24px;
-            margin-right: 5px;
+            font-size: 36px;
         }
 
-        footer {
-            background-color: black;
-            padding: 10px;
-            text-align: center;
-            z-index: 1;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
         }
 
-        footer h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            font-size: 12px;
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
     </style>
 </head>
 <body>
@@ -231,39 +45,46 @@
         </div>
 
         <nav class="navbar">
-            <a href="#">Home</a>
-            <a href="#">Missões</a>
-            <a href="#">Notícias</a>
-            <a href="#">Galeria</a>
-            <a href="#">Contato</a>
+            <a href="{{ url_for('publicIndex') }}" class="navbar-item">Home</a>
+            <a href="{{ url_for('documents') }}" class="navbar-item">Documentos</a>
+            <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
+            <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
         </nav>
-        <div class="menu-icon" onclick="toggleMenu()">
+
+        <div class="menu-icon" id="menu-icon">
             <span class="material-icons">menu</span>
         </div>
+
     </header>
 
     <div id="sidebar" class="sidebar">
-        <a href="#" onclick="closeMenu()" class="close-btn">×</a>
-        <a href="#">Home</a>
-        <a href="#">Missões</a>
-        <a href="#">Notícias</a>
-        <a href="#">Galeria</a>
-        <a href="#">Contato</a>
+        <a href="#" onclick="closeMenu()" class="close-btn" style="display: none;">×</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('about') }}">Sobre</a>
     </div>
 
     <main>
-        <section class="carrossel" id="carrosselSection">
-            <div class="carousel-container" id="carouselContainer">
-                <div class="carousel-item">
-                    <img src="{{ url_for('static', filename='./images/background_earth.jpg') }}" alt="Imagem Fixa" class="zoomable">
-                    <div class="image-info" id="imageInfo_1">
-                        <p id="imageDescription_1">Descrição: Descrição da imagem fixa</p>
-                        <p id="imageAuthor_1">Autor: Autor da imagem fixa</p>
-                        <p id="imageDate_1">Data de Upload: 2024-01-02</p>
+        <div class="background">
+            <img src="{{ url_for('static', filename='./images/sky.jpg') }}" alt="Imagem Fixa">
+        </div>
+
+        <section class="carrossel" id="carrossel">
+            <div class="container">
+                <div class="wrapper">
+                    <div class="wrapper-holder elastic" id="carouselHolder">
+                        {% for index, image in carousel_images_with_index %}
+                            <div class="slider-img" id="slider-img-{{ index }}">
+                                <img src="{{ url_for('static', filename=image) }}" alt="Carousel Image">
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        </section>
+        
+            <div class="scroll-arrow" onclick="scrollToContent()">
+                <span class="material-icons">keyboard_arrow_down</span>
+            </div>
+        </section>        
 
         <section class="pastas">
             {% for folder in folders %}
@@ -288,25 +109,80 @@
     </footer>
 
     <script>
-        // MENU LATERAL
-        function toggleMenu() {
-            document.getElementById('sidebar').style.width = '250px';
-        }
-    
-        function closeMenu() {
-            document.getElementById('sidebar').style.width = '0';
-        }
 
-        // ZOOM DE IMAGEM
-        const carrosselSection = document.getElementById('carrosselSection');
-        const zoomableImage = document.querySelector('.zoomable');
 
-        carrosselSection.addEventListener('mouseenter', () => {
-            zoomableImage.style.transform = 'scale(1.1)';
+
+        $(document).ready(function () {
+            $("#menu-icon").click(function () {
+                const sidebar = $("#sidebar");
+                const menuIcon = $("#menu-icon span");
+
+                if (sidebar.width() === 300) {
+                    sidebar.animate({ width: "0" }, 500);
+                    menuIcon.removeClass("rotate");
+                    setTimeout(function () {
+                        menuIcon.text("menu");
+                    }, 250);
+                } else {
+                    sidebar.animate({ width: "300px" }, 500);
+                    menuIcon.addClass("rotate");
+                    setTimeout(function () {
+                        menuIcon.text("clear");
+                    }, 250);
+                }
+            });
+
+            // Fechar o menu ao clicar fora dele
+            $(document).click(function (event) {
+                const sidebar = $("#sidebar");
+                const menuIcon = $("#menu-icon span");
+
+                if (!sidebar.is(event.target) && sidebar.has(event.target).length === 0 &&
+                    !menuIcon.is(event.target) && menuIcon.has(event.target).length === 0) {
+                    sidebar.animate({ width: "0" }, 500);
+                    menuIcon.removeClass("rotate");
+                    setTimeout(function () {
+                        menuIcon.text("menu");
+                    }, 250);
+                }
+            });
         });
 
-        carrosselSection.addEventListener('mouseleave', () => {
-            zoomableImage.style.transform = 'scale(1.0)';
+        $(document).ready(function () {
+            // Função para verificar se a seta deve ser exibida
+            function checkArrowVisibility() {
+                const carrosselSection = $("#carrossel");
+                const scrollArrow = $(".scroll-arrow");
+
+                const isScrolledIntoView = (elem) => {
+                    const docViewTop = $(window).scrollTop();
+                    const docViewBottom = docViewTop + $(window).height();
+                    const elemTop = $(elem).offset().top;
+                    const elemBottom = elemTop + $(elem).height();
+                    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+                };
+
+                // Se a seção do carrossel estiver visível, mostra a seta, caso contrário, oculta.
+                if (isScrolledIntoView(carrosselSection)) {
+                    scrollArrow.show();
+                } else {
+                    scrollArrow.hide();
+                }
+            }
+
+            // Chame a função na inicialização e em eventos de rolagem
+            checkArrowVisibility();
+
+            // Atualize a visibilidade da seta quando a página for rolada
+            $(window).scroll(function () {
+                checkArrowVisibility();
+            });
+
+            // Role a página até o conteúdo ao clicar na seta
+            $(".scroll-arrow").click(function () {
+                const targetSection = $(".pastas");  // Substitua pelo seletor do destino desejado
+                $("html, body").animate({ scrollTop: targetSection.offset().top }, 1000);
+            });
         });
     </script>
     

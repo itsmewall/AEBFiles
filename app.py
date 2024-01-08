@@ -2,48 +2,21 @@ import random
 import sqlite3
 from flask import Flask, jsonify, render_template, request, redirect, url_for, send_from_directory
 import os
+from flask_cors import CORS
 from os import path
 from werkzeug.utils import secure_filename
 from PIL import Image
+from urllib.parse import unquote
 
 app = Flask(__name__)
+CORS(app)  
 
 DATABASE_NAME = 'docs_info.db' 
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'pdf', 'xlsx', 'xls'}
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
-
-def compress_image(image_path):
-    img = Image.open(image_path)
-    new_width = 800  # Ajuste conforme necessário
-    new_height = 600  # Ajuste conforme necessário
-    # Redimensiona a imagem
-    img = img.resize((new_width, new_height), Image.ANTIALIAS)
-    img.save(image_path)
-
-def get_all_images():
-    folders = [folder for folder in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isdir(os.path.join(app.config['UPLOAD_FOLDER'], folder))]
-
-    all_images = {}
-    for folder in folders:
-        images = get_images_from_folder(folder)
-        all_images[folder] = {'images': images, 'info': {}}
-
-    # Adicionando a obtenção de imagens para a pasta 'carousel'
-    carousel = 'carousel'
-    carousel_images = ['caminho_para_sua_imagem.jpg']  # Substitua pelo caminho real da imagem fixa
-
-    # Obtém caminhos completos das imagens no carrossel
-    carousel_images_full_paths = [url_for('view_image', folder_name=carousel, image_name=image) for image in carousel_images]
-
-    all_images[carousel] = {'images': carousel_images, 'info': {}, 'full_paths': carousel_images_full_paths}
-
-    return all_images
-
-
 
 def get_images_from_folder(folder):
     folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder)
@@ -104,41 +77,6 @@ def create_database():
 create_database()
 
 
-@app.route('/get_image_info', methods=['GET'])
-def get_image_info():
-    image_name = request.args.get('image_name')
-
-    # Conecta ao banco de dados
-    conn = sqlite3.connect(DATABASE_NAME)
-    cursor = conn.cursor()
-
-    # Substitua isso pela lógica real para obter informações da imagem do seu sistema
-    image_info = {
-        'description': 'Descrição da imagem',
-        'author': 'Autor da imagem',
-        'date_uploaded': 'Data de upload',
-    }
-
-    # Obtém informações da imagem
-    cursor.execute('SELECT * FROM docs_info WHERE doc_name = ?', (image_name,))
-    doc_info = cursor.fetchone()
-
-    # Fecha a conexão
-    conn.close()
-
-    if doc_info:
-        # Retorna as informações em formato JSON
-        return jsonify({
-            'description': doc_info[2],
-            'author': doc_info[3],
-            'date_uploaded': doc_info[4]
-        })
-    else:
-        # Retorna um objeto vazio se não houver informações
-        return jsonify({})
-
-
-
 def populate_database():
     conn = sqlite3.connect(DATABASE_NAME)
     cursor = conn.cursor()
@@ -157,6 +95,21 @@ create_database()
 # Chame a função para popular o banco de dados
 populate_database()
 
+def get_all_images():
+    all_images = {}
+    folders = [folder for folder in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isdir(os.path.join(app.config['UPLOAD_FOLDER'], folder))]
+
+    for folder in folders:
+        folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder)
+        images = [img for img in os.listdir(folder_path) if img.lower().endswith(('png', 'jpg', 'jpeg', 'gif'))]
+        decoded_images = [unquote(img) for img in images]
+        all_images[folder] = {'full_paths': [os.path.join(folder_path, img) for img in decoded_images], 'info': {}}
+    return all_images
+
+@app.route('/uploads/carousel/<filename>')
+def serve_carousel_images(filename):
+    return send_from_directory('/uploads/carousel', filename)
+
 @app.route('/')
 def publicIndex():
     folders = [folder for folder in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isdir(os.path.join(app.config['UPLOAD_FOLDER'], folder))]
@@ -170,35 +123,35 @@ def publicIndex():
     # Get all images for each folder
     folder_images = get_all_images()
 
-    # Conecta ao banco de dados
-    conn = sqlite3.connect(DATABASE_NAME)
-    cursor = conn.cursor()
+    carousel_images_with_index = [(index, image.replace("\\", "/")) for index, image in enumerate(folder_images['carousel']['full_paths'])]
 
-    # Itera sobre os resultados do banco de dados e adiciona informações ao dicionário folder_images
-    for folder, images in folder_images.items():
-        for image in images:
-            cursor.execute('SELECT * FROM docs_info WHERE doc_name = ?', (image,))
-            image_info = cursor.fetchone()
-
-            if image_info:
-                image_details = {
-                    'description': image_info[2],
-                    'author': image_info[3],
-                    'date_uploaded': image_info[4]
-                }
-                # Atualiza o dicionário folder_images
-                folder_images[folder]['info'][image] = image_details
-
-    # Fecha a conexão
-    conn.close()
-
-    return render_template('publicIndex.html', folders=folders, folder_images=folder_images)
+    return render_template('publicIndex.html', folders=folders, folder_images=folder_images, carousel_images_with_index=carousel_images_with_index)
 
 
 @app.route('/admin')
 def adminIndex():
     folders = [folder for folder in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isdir(os.path.join(app.config['UPLOAD_FOLDER'], folder))]
     return render_template('adminIndex.html', folders=folders)
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/sobre')
+def about():    
+    return render_template('about.html')
+
+@app.route('/contatos')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/documents')
+def documents():
+    return render_template('documents.html')
+
+@app.route('/news')
+def news():
+    return render_template('news.html')
 
 @app.route('/folder/<folder_name>')
 def show_folder(folder_name):

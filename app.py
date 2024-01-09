@@ -104,7 +104,9 @@ def get_all_images():
         images = [img for img in os.listdir(folder_path) if img.lower().endswith(('png', 'jpg', 'jpeg', 'gif'))]
         decoded_images = [unquote(img) for img in images]
         all_images[folder] = {'full_paths': [os.path.join(folder_path, img) for img in decoded_images], 'info': {}}
+
     return all_images
+
 
 @app.route('/uploads/carousel/<filename>')
 def serve_carousel_images(filename):
@@ -123,9 +125,12 @@ def publicIndex():
     # Get all images for each folder
     folder_images = get_all_images()
 
+    # Adiciona as informações das imagens ao contexto do template
+    app.jinja_env.globals.update(folder_images=folder_images)
+
     carousel_images_with_index = [(index, image.replace("\\", "/")) for index, image in enumerate(folder_images['carousel']['full_paths'])]
 
-    return render_template('publicIndex.html', folders=folders, folder_images=folder_images, carousel_images_with_index=carousel_images_with_index)
+    return render_template('publicIndex.html', folders=folders, carousel_images_with_index=carousel_images_with_index)
 
 
 @app.route('/admin')
@@ -193,10 +198,7 @@ def upload_file():
         # Salvar o arquivo
         file.save(file_path)
 
-        # Comprimir a imagem (se for uma imagem)
-        if file.filename.lower().endswith(('png', 'jpg', 'jpeg', 'gif')):
-            compress_image(file_path)
-
+        
     return redirect(url_for('adminIndex'))
 
 @app.route('/view/<folder_name>/<image_name>')

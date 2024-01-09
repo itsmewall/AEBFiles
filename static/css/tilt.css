@@ -1,0 +1,9 @@
+
+.tilt {
+    perspective: 1000px;
+}
+
+.tilt:hover {
+    transform: scale(1.5) rotateX(20deg) rotateY(15deg); 
+    transition: transform 3s ease; 
+}

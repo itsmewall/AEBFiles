@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/carrossel.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pastas.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tilt.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
     <title>AEB Files</title>
 
     <style>
@@ -75,37 +79,85 @@
                         {% for index, image in carousel_images_with_index %}
                             <div class="slider-img" id="slider-img-{{ index }}">
                                 <img src="{{ url_for('static', filename=image) }}" alt="Carousel Image">
+                                <div class="image-info">
+                                    <h2>Informações da Imagem</h2>
+                                    <p>Toda imagem terá sua etiqueta com informações de destaque!</p>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
-        
             <div class="scroll-arrow" onclick="scrollToContent()">
                 <span class="material-icons">keyboard_arrow_down</span>
             </div>
         </section>        
 
-        <section class="pastas">
-            {% for folder in folders %}
-                <a href="{{ url_for('show_folder', folder_name=folder) }}" class="card">
-                    <div class="foto">
-                        {% if folder_images[folder] and folder_images[folder]['images'] %}
-                            {% set first_image_path = url_for('static', filename='uploads/' + folder + '/images/' + folder_images[folder]['images'][0]) %}
-                        {% else %}
-                            {% set first_image_path = url_for('static', filename='path_para_sua_imagem_default.jpg') %}
-                        {% endif %}
+        <div class="pastas-container">
+            <div class="pastas-texts">
+                <p class="text-pasta">Acesse arquivos da AEB</p>
+                <h1 class="h1-pasta">Pastas Compartilhadas</h1>
+            </div>
+            <section class="pastas" id="pastas">
+                    <div class="cards-container">
+                        {% for folder in folders %}
+                            <a href="{{ url_for('show_folder', folder_name=folder) }}" class="card tilt">
+                                <div class="foto">
+                                    {% if folder_images[folder] and folder_images[folder]['images'] %}
+                                        {% set cover_image_path = url_for('static', filename='uploads/' + folder + '/images/' + folder_images[folder]['images'][0]) %}
+                                        <img src="{{ cover_image_path }}" alt="Capa do Card">
+                                    {% else %}
+                                        {% set cover_image_path = url_for('static', filename='path_para_sua_imagem_default.jpg') %}
+                                        <img src="{{ cover_image_path }}" alt="Capa do Card Padrão">
+                                    {% endif %}
+                                    <p>{{ folder }}</p>
+                                </div>
+                            </a>
+                        {% endfor %}
                     </div>
-                    <div>
-                        <p>{{ folder }}</p>
-                    </div>
-                </a>
-            {% endfor %}
-        </section>
+                <script src="/static/js/vanilla-tilt.js"></script>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        VanillaTilt.init(document.querySelectorAll('.tilt'), {
+                            max: 15,
+                            speed: 500
+                        });
+                    });
+                </script>
+            </section>
+        </div>
     </main>
 
     <footer>
-        <h1>AEB - Agência Espacial Brasileira © 2024</h1>
+        <h1 class="footer-name">AEB - Agência Espacial Brasileira © 2024</h1>
+        <div id="social-links" class="social-links"></div>
+        <div>
+            <img src="{{ url_for('static', filename='/images/assinatura_gov.png') }}" alt="Assinatura do Governo" class="footer-gov">
+        </footer>
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Obtém o elemento do rodapé
+                const footer = document.getElementById('social-links');
+    
+                // Array de objetos representando as redes sociais e seus links
+                const socialMediaLinks = [
+                    { name: 'Facebook', url: 'https://www.facebook.com/agenciaespacialbrasileira/' },
+                    { name: 'LinkedIn', url: 'https://br.linkedin.com/company/agencia-espacial-brasileira-oficial' },
+                    { name: 'Instagram', url: 'https://www.instagram.com/agenciaespacialbrasileira/' }
+                ];
+    
+                // Adiciona os links ao rodapé
+                socialMediaLinks.forEach(link => {
+                    const anchor = document.createElement('a');
+                    anchor.href = link.url;
+                    anchor.target = '_blank';
+                    anchor.innerText = link.name;
+                    footer.appendChild(anchor);
+                });
+            });
+        </script>
     </footer>
 
     <script>

@@ -1,58 +1,32 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/adminIndex.css') }}">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <title>AEBFiles | Admin</title>
+    <title>AEB Files Admin</title>
+    <!-- Adicione aqui seus links para folhas de estilo, scripts, etc. -->
 </head>
 <body>
-    <header>
-        <p>Olá, {{ ldap_username.split()[0] }}!</p>
-        <div class="logo-container">
-            <!-- <img src="{{ url_for('static', filename='images/logo-original.png') }}" alt="Logo" class="logo"> -->
-            <h1>AEB Files</h1>
-        </div>
-    </header>
 
-    <!-- Card 1 -->
-    <div class="card">
-        <h1>Criar pasta</h1>
-        <form action="/create_folder" method="post">
-            <label for="folder_name">Nova Pasta:</label>
-            <input type="text" id="folder_name" name="folder_name" required>
-            <button type="submit">Criar Pasta</button>
-        </form>
-    </div>
+<!-- 1. Header -->
+<header>
+    <h1>AEB Files</h1>
+    <p>Olá, {{ ldap_username.split()[0] }}!</p>
+</header>
 
-    <div class="card">
-        <h1>Upload de Arquivos</h1>
-        <form action="/upload" method="post" enctype="multipart/form-data" class="upload">
-            <label for="file">Escolha um arquivo:</label>
-            <input type="file" id="file" name="file" accept="/*" required>
-            
-            <label for="folder">Selecione uma Pasta:</label>
-            <select id="folder" name="folder" required>
-                {% for folder in folders %}
-                    <option class="option-select" value="{{ folder }}">{{ folder }}</option>
-                {% endfor %}
-            </select>
-            
-            <button type="button" id="showInfo">Informações Adicionais</button>
-            
-            <div class="info-container">
-
-                <div id="additionalInfo" class="additional-info">
-                    <input type="text" id="additionalInfo1" name="additionalInfo" placeholder="Informações Adicionais">
-                    <input type="text" id="additionalInfo2" name="additionalInfo" placeholder="Informações Adicionais">
-                    <input type="text" id="additionalInfo3" name="additionalInfo" placeholder="Informações Adicionais">
-                </div>
-            
+<!-- 2. Main Content -->
+<main>
+    <!-- 2.1 Cards -->
+    <div class="card-container">
+        <!-- Card 1: Criar Pasta -->
+        <div class="card">
+            <form action="/create_folder" method="post" autocomplete="off">
+                <label for="folderName">Nome da Pasta:</label>
+                <input type="text" id="folderName" name="folderName" required>
+        
+                <!-- Adicionando o toggle switch para permitir downloads -->
                 <div class="lanterna">
                     <label for="allowDownloads">Permitir Downloads:</label>
                     <div class="toggle-button">
@@ -60,41 +34,63 @@
                         <label for="allowDownloadsToggle"></label>
                     </div>
                 </div>
-            </div>
-            
-            
-            <button type="submit">Enviar</button>
-        </form>
+        
+                <!-- Adicionando campo para informações sobre a pasta -->
+                <label for="folderInfo">Informações sobre a Pasta:</label>
+                <textarea id="folderInfo" name="folderInfo" maxlength="500"></textarea>
+        
+                <button type="submit">Criar Pasta</button>
+            </form>
+        </div>        
+    
+        <!-- Card 2: Upload de Arquivos -->
+        <div class="card">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <label for="file">Selecione um arquivo:</label>
+                <input type="file" id="file" name="file" accept="*/*" required>
+                <label for="folder">Selecione a pasta:</label>
+                <select id="folder" name="folder">
+                    {% for folder in folders %}
+                        <option class="option-select" value="{{ folder }}">{{ folder }}</option>
+                    {% endfor %}
+                </select>
+                <label for="fileType">Tipo de Arquivo:</label>
+                <input type="text" id="fileType" name="fileType">
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+        <!-- Card 3: Informações do Arquivo -->
+        <div class="card">
+            <form action="/file_info" method="post">
+                <!-- Adicione os campos necessários para as informações do arquivo -->
+                <label for="title">Título do Arquivo:</label>
+                <input type="text" id="title" name="title">
+                <label for="info">Informações do Arquivo:</label>
+                <textarea id="info" name="info" maxlength="500"></textarea>
+                
+                <div class="lanterna">
+                    <label for="allowDownloads">Permitir Downloads:</label>
+                    <div class="toggle-button">
+                        <input type="checkbox" id="allowDownloadsToggle" onchange="toggleAllowDownloads()">
+                        <label for="allowDownloadsToggle"></label>
+                    </div>
+                </div>
+        
+                <button type="submit">Salvar Informações</button>
+            </form>
+        </div>
     </div>
 
-    <div class="card">
-        <h1>Pastas</h1>
-        <div class="card3-container">
-            {% for folder in folders %}
+    <!-- Card 4: Pastas -->
+    <div class="full-width-card">
+        {% for folder in folders %}
             <a href="{{ url_for('show_folder', folder_name=folder) }}" class="card">{{ folder }}</a>
         {% endfor %}
     </div>
+</main>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const showInfoButton = document.getElementById('showInfo');
-        const infoContainer = document.querySelector('.info-container');
+<!-- Adicione aqui seus scripts, se necessário -->
 
-        showInfoButton.addEventListener('click', function () {
-            infoContainer.style.display = infoContainer.style.display === 'none' ? 'block' : 'none';
-        });
-    });
-
-    function toggleAllowDownloads() {
-        var allowDownloadsToggle = document.getElementById('allowDownloadsToggle');
-        var isChecked = allowDownloadsToggle.checked;
-
-        // Faça algo com o estado (isChecked)
-    }
-
-
-    </script>
 </body>
 </html>
-
-

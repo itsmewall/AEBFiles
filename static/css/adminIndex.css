@@ -1,279 +1,126 @@
-:root {
-    --cor-botoes: black;
-}
-
-/* Reset CSS */
-* {
-    box-sizing: border-box;
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
 }
 
-/* Body Styling */
-body {
-    background-color: #000000;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: #fff;
-    font-family: 'Arial', sans-serif;
+header {
+    background-color: #025E96;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+}
+
+main {
+    padding: 20px;
+}
+
+.card {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    margin: 0 1% 20px 1%;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    flex: 1;
 }
 
-/* Header Styling */
-header {
-    background-color: rgb(9, 9, 9);
-    padding: 10px;
-    width: 100%;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
-
-header p {
-    font-size: 1em;
-    color: white;
-    font-family: Orbitron, sans-serif;
-}
-
-header h1 {
-    font-family: Orbitron, sans-serif;
-    font-size: 3em;
-}
-
-/* Card Container Styling */
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 20px;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-bottom: -20px;
 }
 
-/* Card Styling */
-.card {
-    width: 100%;
-    height: auto;
-    max-width: 90vh;
-    margin: 20px;
+.full-width-card {
+    background-color: #f4f4f4;
+    border-radius: 8px;
     padding: 20px;
-    background-color: rgb(9, 9, 9);
-    border: 1px solid #444;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.757);
-    text-align: center;
-    color: #fff;
-    transition: transform 0.2s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(100% - 40px); 
+    box-sizing: border-box;
+    margin: 20px 1% 20px 1%;
 }
 
-.card h1 {
-    font-family: Orbitron, sans-serif;
-    font-size: 1.5em;
-    margin-bottom: 20px;
-}
-
-.card3-container {
-    display: flex;
-    align-items: center;
-    height: 100%;
-
-}
-
-/* Form Styling */
 form {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 10px;
+    flex: 1; 
 }
-
-/* Estilo para o Select */
-select {
-    padding: 15px;
-    text-align: center;
-    justify-content: center;
-    border: 1px solid #ddd;
-    background-color: #333;
-    color: #fff;
-    font-size: 1em;
-    cursor: pointer;
-    appearance: none; /* Remove a seta padrão do Firefox */
-}
-
-
-select .option-select {
-    padding: 15px;
-    margin: 2px;
-    border: none;
-    font-size: 1.3em;
-    cursor: pointer;
-    backdrop-filter: blur(5px);
-}
-
-/* Adiciona uma seta personalizada no Firefox */
-select:-moz-focusring {
-    color: transparent;
-    text-shadow: 0 0 0 #fff;
-}
-
 
 label {
-    font-size: 1.2em;
-    margin-bottom: 5px;
-    color: var(--cor-botoes);
+    color: #025E96;
+    font-weight: bold;
 }
 
-input[type="text"],
-input[type="file"] {
-    margin-bottom: 10px;
+
+#folderInfo {
+    height: 80px; /* Ajuste conforme necessário */
+}
+
+input,
+select,
+textarea {
     padding: 10px;
-    border: none;
-    background-color: #000000;
-    color: #fff;
-}
-
-input[type="file"] {
-    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 button {
-    margin-top: 10px;
-    padding: 15px 30px;
+    background-color: #025E96;
+    color: #ffffff;
+    padding: 10px;
     border: none;
-    background-color: var(--cor-botoes);
-    color: #fff;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
 }
 
 button:hover {
-    background-color: var(--cor-botoes);
+    background-color: #01466B;
 }
 
-.card:hover {
-    transform: scale(1.02);
-}
-
-/* Additional Information Styling */
-.info-container {
-    display: none;
-    margin-top: 15px;
-    padding: 10px;
-    color: #fff;
-    border-radius: 5px;
-}
-
-.card.active .info-container {
+a.card {
     display: block;
-}
-
-/* Form Styling */
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-label {
-    font-size: 1em;
-    margin-bottom: 10px;
-    color: rgb(255, 255, 255);
-    font-family: Orbitron, sans-serif;
-    text-transform: uppercase;    
-}
-
-input[type="text"],
-input[type="file"] {
-    margin-bottom: 15px;
-    padding: 12px;
-    border: 1px solid #ddd; /* Adiciona uma borda suave */
-    background-color: #333;
-    color: #fff;
-    font-family: 'Arial', sans-serif; /* Define uma fonte de backup */
-}
-
-input[type="file"] {
-    cursor: pointer;
-}
-
-button {
-    margin-top: 20px;
-    padding: 20px 35px;
-    border: none;
-    background-color: var(--cor-botoes);
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-    text-transform: uppercase;
-    font-family: Orbitron, sans-serif;
-}
-
-button:hover {
-    background-color: var(--cor-botoes);
-}
-
-.card:hover {
-    transform: scale(1.01);
-}
-
-/* Adiciona espaçamento e estilo para o botão "Mostrar Informações Adicionais" */
-#showInfo {
-    margin-top: 20px;
-    padding: 20px 35px;
-    background-color: var(--cor-botoes);
-    color: #fff;
-    border: none;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
     border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    padding: 20px;
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #025E96;
+    transition: background-color 0.3s ease;
 }
 
-#showInfo:hover {
-    background-color: var(--cor-botoes);
+a.card:hover {
+    background-color: #f0f0f0;
 }
 
-/* Estilo para o container de informações adicionais */
-.info-container {
-    display: none;
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #444;
-    border-radius: 8px;
-    background-color: #333;
-}
-
-/* Estilo para os campos de informações adicionais */
-.additional-info input {
-    margin-bottom: 15px;
-    padding: 12px;
-    border: 1px solid #555;
-    border-radius: 8px;
-    background-color: #444;
-    color: #fff;
-}
-
-/* Estilo para a lanterna (Permitir Downloads) */
 .lanterna {
     margin-top: 20px;
     display: flex;
     align-items: center;
+    flex: 1; /* Adicione esta linha para ocupar o espaço disponível na mesma linha */
 }
 
 .lanterna label {
     margin-right: 10px;
-    font-size: 1.2em;
-    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
 }
 
 /* Estilo para o Toggle Button (Permitir Downloads) */
 .toggle-button {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 30px;
+    display: flex; /* Adicione esta linha para colocar o label e o input na mesma linha */
+    align-items: center; /* Adicione esta linha para centralizar verticalmente */
+    margin-top: auto;
 }
 
 .toggle-button input {
@@ -281,12 +128,10 @@ button:hover {
 }
 
 .toggle-button label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #ddd;
+    position: relative;
+    background-color: rgb(187, 187, 187);
+    width: 60px;
+    height: 30px;
     border-radius: 30px;
     cursor: pointer;
     transition: background-color 0.3s;

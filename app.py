@@ -8,7 +8,6 @@ from os import path
 from werkzeug.utils import secure_filename
 from PIL import Image
 from urllib.parse import unquote
-import traceback
 from ldap3 import Connection, Server
 import logging
 

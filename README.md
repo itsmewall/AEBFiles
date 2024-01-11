@@ -13,9 +13,9 @@
 
 ```bash
 pip install -r requirements.txt
-```bash
+```
 
 ## Uso 
-```bash
+``` bash
 python app.py
-```bash
+```

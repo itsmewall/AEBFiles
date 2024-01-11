@@ -1,0 +1,140 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('/static/images/nebula_brilho_reduzido.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.split-section {
+    display: flex;
+    width: 100%;
+    max-width: 30%;
+    height: 40%;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgb(0, 0, 0);
+    border-radius: 18px;
+    color: #fff; /* Cor do texto claro */
+}
+
+.login-section {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.609);
+    backdrop-filter: blur(5px);
+}
+
+.login-box {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.wrap-input {
+    position: relative;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+.icon {
+    position: absolute;
+    font-size: 20px;
+    color: #bbb; /* Cor do ícone mais clara */
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+.input-form {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #555; /* Cor da borda mais escura */
+    outline: none;
+    font-size: 16px;
+    color: #ddd; /* Cor do texto mais claro */
+    background-color: transparent;
+    transition: border-color 0.3s;
+}
+
+.input-form:focus {
+    border-color: #007bff; /* Cor da borda ao focar */
+}
+
+.focus-input-form::before {
+    content: attr(data-placeholder);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    color: #bbb; /* Cor do texto mais clara */
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.focus-input-form::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #007bff; /* Cor de destaque */
+    transition: 0.5s;
+}
+
+.wrap-input.has-val .focus-input-form::before {
+    top: -18px;
+    font-size: 14px;
+}
+
+.wrap-input.has-val .focus-input-form::after {
+    height: 20px;
+}
+
+.container-login-form-btn {
+    margin-top: 50px;
+}
+
+.login-form-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background: #007bff; /* Cor do botão */
+    color: #fff; /* Cor do texto do botão */
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s;
+}
+
+.login-form-btn:hover {
+    background: #0056b3; /* Cor de destaque ao passar o mouse */
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff; /* Cor do texto claro */
+    font-size: 14px;
+    padding: 10px;
+}
+
+footer img {
+    width: 25%;
+    margin: 0 5px;
+}

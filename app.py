@@ -1,15 +1,22 @@
 import random
 import sqlite3
-from flask import Flask, jsonify, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, make_response, redirect, render_template, request, send_from_directory, session, url_for, jsonify
+from datetime import datetime, timedelta
 import os
 from flask_cors import CORS
 from os import path
 from werkzeug.utils import secure_filename
 from PIL import Image
 from urllib.parse import unquote
+import traceback
+from ldap3 import Connection, Server
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 CORS(app)  
+app.secret_key = 'AEB'
 
 DATABASE_NAME = 'docs_info.db' 
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -132,15 +139,73 @@ def publicIndex():
 
     return render_template('publicIndex.html', folders=folders, carousel_images_with_index=carousel_images_with_index)
 
+def obter_username_ldap(username, password):
+    server = Server('ldap://192.168.0.83:389')
+    base_dn = 'OU=USUARIOS,OU=AEB,DC=aeb,DC=gov,DC=br'
+    user_dn = f'AEB\\{username}'
+    ldap_connection = Connection(server, user=user_dn, password=password)
+
+    if ldap_connection.bind():
+        search_filter = f'(sAMAccountName={username})'
+        logging.debug(f"Searching LDAP with filter: {search_filter}")
+        
+        ldap_connection.search(base_dn, search_filter, attributes=['displayName'])
+        
+        if ldap_connection.entries:
+            user_entry = ldap_connection.entries[0]
+            display_name = user_entry.displayName.value
+            logging.debug(f"Display Name found: {display_name}")
+            return display_name
+        else:
+            logging.debug("No entries found in LDAP search.")
+    else:
+        logging.debug("LDAP bind failed.")
+
+    return None
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error_message = None
+    success_message = None
+    if 'username' in session:
+        return redirect(url_for('adminIndex'))
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        if not username or not password:
+            error_message = 'Por favor, insira o usuário e a senha.'
+            return render_template('login.html', error_message=error_message)
+        ldap_username = obter_username_ldap(username, password)
+        if ldap_username:
+            session['username'] = username
+            session['ldap_username'] = ldap_username
+            session['expiry'] = datetime.now() + timedelta(minutes=30)
+            # Define o cookie
+            response = make_response(redirect(url_for('adminIndex')))
+            response.set_cookie('username', username, expires=session['expiry'])
+            return response
+        else:
+            error_message = 'Usuário ou senha inválidos. Tente novamente.'
+            return render_template('login.html', error_message=error_message)
+    return render_template('login.html', login_message=success_message, error_message=error_message)
+
+@app.before_request
+def verificar_autenticacao():
+    rotas_autenticacao = ['/login']
+    if ('username' not in session or request.cookies.get('username') != session['username']) and request.path in rotas_autenticacao:
+        return None 
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('login'))
+
 
 @app.route('/admin')
 def adminIndex():
     folders = [folder for folder in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isdir(os.path.join(app.config['UPLOAD_FOLDER'], folder))]
-    return render_template('adminIndex.html', folders=folders)
-
-@app.route('/login')
-def login():
-    return render_template('login.html')
+    ldap_username = session.get('ldap_username')
+    return render_template('adminIndex.html', folders=folders, ldap_username=ldap_username)
 
 @app.route('/sobre')
 def about():    

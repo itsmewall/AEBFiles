@@ -1,121 +1,100 @@
-<!-- Atualizado index.html -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AEB | Arquivos</title>
-    <style>
-
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 20px;
-            background-color: #f5f5f5;
-        }
-
-        h1, h2 {
-            color: #333;
-        }
-
-        form {
-            margin-bottom: 20px;
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-        }
-
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        button {
-            background-color: #007BFF;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        ul li {
-            margin-bottom: 10px;
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        a {
-            color: #007BFF;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/adminIndex.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>AEBFiles | Admin</title>
 </head>
 <body>
     <header>
-        <nav class="navegador">
-            <div>
-                <a href="index.php">Logo</a>
-            </div>
-            <div>
-                <a href="index.php">AEB Files</a>
-            </div>
-            <div>
-                <a href="index.php">Opções</a>
-            </div>
-        </nav>
+        <p>Olá, {{ ldap_username.split()[0] }}!</p>
+        <div class="logo-container">
+            <!-- <img src="{{ url_for('static', filename='images/logo-original.png') }}" alt="Logo" class="logo"> -->
+            <h1>AEB Files</h1>
+        </div>
     </header>
 
-    
-    <form action="/create_folder" method="post">
-        <label for="folder_name">Nova Pasta:</label>
-        <input type="text" id="folder_name" name="folder_name" required>
-        <button type="submit">Criar Pasta</button>
-    </form>
+    <!-- Card 1 -->
+    <div class="card">
+        <h1>Criar pasta</h1>
+        <form action="/create_folder" method="post">
+            <label for="folder_name">Nova Pasta:</label>
+            <input type="text" id="folder_name" name="folder_name" required>
+            <button type="submit">Criar Pasta</button>
+        </form>
+    </div>
 
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <label for="file">Escolha um arquivo:</label>
-        <input type="file" id="file" name="file" accept="image/*" required>
-        
-        <label for="folder">Selecione uma Pasta:</label>
-        <select id="folder" name="folder" required>
+    <div class="card">
+        <h1>Upload de Arquivos</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data" class="upload">
+            <label for="file">Escolha um arquivo:</label>
+            <input type="file" id="file" name="file" accept="/*" required>
+            
+            <label for="folder">Selecione uma Pasta:</label>
+            <select id="folder" name="folder" required>
+                {% for folder in folders %}
+                    <option class="option-select" value="{{ folder }}">{{ folder }}</option>
+                {% endfor %}
+            </select>
+            
+            <button type="button" id="showInfo">Informações Adicionais</button>
+            
+            <div class="info-container">
+
+                <div id="additionalInfo" class="additional-info">
+                    <input type="text" id="additionalInfo1" name="additionalInfo" placeholder="Informações Adicionais">
+                    <input type="text" id="additionalInfo2" name="additionalInfo" placeholder="Informações Adicionais">
+                    <input type="text" id="additionalInfo3" name="additionalInfo" placeholder="Informações Adicionais">
+                </div>
+            
+                <div class="lanterna">
+                    <label for="allowDownloads">Permitir Downloads:</label>
+                    <div class="toggle-button">
+                        <input type="checkbox" id="allowDownloadsToggle" onchange="toggleAllowDownloads()">
+                        <label for="allowDownloadsToggle"></label>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h1>Pastas</h1>
+        <div class="card3-container">
             {% for folder in folders %}
-                <option value="{{ folder }}">{{ folder }}</option>
-            {% endfor %}
-        </select>
-
-        <button type="submit">Enviar</button>
-    </form>
-
-    <h2>Pastas:</h2>
-    <ul>
-        {% for folder in folders %}
-            <li><a href="{{ url_for('show_folder', folder_name=folder) }}">{{ folder }}</a></li>
+            <a href="{{ url_for('show_folder', folder_name=folder) }}" class="card">{{ folder }}</a>
         {% endfor %}
-    </ul>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const showInfoButton = document.getElementById('showInfo');
+        const infoContainer = document.querySelector('.info-container');
+
+        showInfoButton.addEventListener('click', function () {
+            infoContainer.style.display = infoContainer.style.display === 'none' ? 'block' : 'none';
+        });
+    });
+
+    function toggleAllowDownloads() {
+        var allowDownloadsToggle = document.getElementById('allowDownloadsToggle');
+        var isChecked = allowDownloadsToggle.checked;
+
+        // Faça algo com o estado (isChecked)
+    }
+
+
+    </script>
 </body>
 </html>
+
+

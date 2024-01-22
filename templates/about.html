@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+
+    <title>Sobre</title>
+</head>
+
+<header>
+    <h1>Sobre Nos</h1>
+</header>
+
+<main>
+    <a href="{{ url_for('publicIndex') }}">Voltar para a página inicial</a>
+
+    <img src="" alt="Frente AEB">
+    <h2>Quem somos</h2>
+    <p>A Agência Espacial Brasileira (AEB) é uma autarquia vinculada ao Ministério da Ciência, Tecnologia e Inovações (MCTI). Foi criada em 10 de fevereiro de 1994, pela Lei nº 8.854, com a finalidade de promover o bem-estar dos brasileiros por meio do emprego soberano do setor espacial.</p>
+    
+    <h2>Missão</h2>
+
+</main>
+
+<!-- <footer>
+    <h1 class="footer-name">AEB - Agência Espacial Brasileira © 2024</h1>
+    <div id="social-links" class="social-links"></div>
+    <div>
+        <img src="{{ url_for('static', filename='/images/assinatura_gov.png') }}" alt="Assinatura do Governo" class="footer-gov">
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtém o elemento do rodapé
+            const footer = document.getElementById('social-links');
+    
+            // Array de objetos representando as redes sociais e seus links
+            const socialMediaLinks = [
+            { name: 'Facebook', url: 'https://www.facebook.com/agenciaespacialbrasileira/' },
+            { name: 'LinkedIn', url: 'https://br.linkedin.com/company/agencia-espacial-brasileira-oficial' },
+            { name: 'Instagram', url: 'https://www.instagram.com/agenciaespacialbrasileira/' }
+            ];
+
+            // Adiciona os links ao rodapé
+            socialMediaLinks.forEach(link => {
+            const anchor = document.createElement('a');
+            anchor.href = link.url;
+            anchor.target = '_blank';
+            anchor.innerText = link.name;
+            footer.appendChild(anchor);
+
+            });
+        });
+    </script>
+</footer> -->
+</html>

@@ -1,0 +1,37 @@
+.startabout{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    margin-top: 2%;
+}
+
+.startabout .img_aeb {
+    width: 50%;
+    height: 50%;
+    margin: 1% auto; /* Adicionei 'auto' para centralizar a imagem horizontalmente */
+    display: block; /* Garante que a margem 'auto' funcione corretamente */
+}
+
+
+
+.miviva {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+    width: 50%;
+    margin: 3% auto; /* Adicionei 'auto' para centralizar o container horizontalmente */
+}
+.miviva_2{
+    padding: 5%;
+}
+
+.miviva_2 h2 {
+    margin-bottom: 10px; /* Adicionei um espaçamento inferior para melhor visualização, você pode ajustar conforme necessário */
+}
+
+.miviva_2 h3 {
+    font-size: 16px; /* Ajuste o tamanho máximo conforme necessário */
+    margin: 10% 0; /* Espaçamento vertical entre os h3 */
+}

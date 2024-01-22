@@ -4,28 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pastas.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tilt.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
-
-    <title>Sobre</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+    <title>Sobre Nós</title>
 </head>
 
 <header>
-    <h1>Sobre Nos</h1>
+    <div class="logo-container">
+        <!-- <img src="{{ url_for('static', filename='images/logo-original.png') }}" alt="Logo" class="logo"> -->
+        <h1>AEB Files</h1>
+    </div>
+
+    <nav class="navbar">
+        <a href="{{ url_for('publicIndex') }}" class="navbar-item">Home</a>
+        <a href="{{ url_for('documents') }}" class="navbar-item">Documentos</a>
+        <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
+        <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
+    </nav>
+
+    <div class="menu-icon" id="menu-icon">
+        <span class="material-icons">menu</span>
+    </div>
+
 </header>
 
 <main>
     <a href="{{ url_for('publicIndex') }}">Voltar para a página inicial</a>
 
-    <img src="" alt="Frente AEB">
-    <h2>Quem somos</h2>
-    <p>A Agência Espacial Brasileira (AEB) é uma autarquia vinculada ao Ministério da Ciência, Tecnologia e Inovações (MCTI). Foi criada em 10 de fevereiro de 1994, pela Lei nº 8.854, com a finalidade de promover o bem-estar dos brasileiros por meio do emprego soberano do setor espacial.</p>
+    <section class="startabout">
+        <h2>Quem somos</h2>
+        <img class="img_aeb" src="static\uploads\carousel\ac614a71-e84b-4b3d-a955-76acd3e71c7c.jpeg" alt="Frente AEB">
+        <p>A Agência Espacial Brasileira (AEB), autarquia vinculada ao Ministério da Ciência, Tecnologia e Inovações  (MCTI), é a instituição responsável por formular, coordenar e executar a Política Espacial Brasileira. Desde a sua criação, em fevereiro de 1994, a Agência trabalha para empreender os esforços do governo brasileiro na promoção  da autonomia do setor espacial.
+
+            <br>A Política Nacional de Desenvolvimento das Atividades Espaciais (PNDAE) estabelece objetivos e diretrizes para os programas e projetos nacionais relativos à área espacial, e tem o Programa Nacional de Atividades Espaciais (PNAE) como principal instrumento de planejamento.
+            
+            <br>A organização e execução das atividades são instituídas pelo Sistema Nacional de Desenvolvimento das Atividades Espaciais (SINDAE), que define a AEB como órgão central e coordenador-geral das atividades.
+            
+            <br>Existem outros órgãos que fazem parte do SINDAE, com destaque ao Instituto Nacional de Pesquisas Espaciais (INPE), do MCTI; ao Departamento de Ciência e Tecnologia Aeroespacial (DCTA), do Comando da Aeronáutica (Comaer), do Ministério da Defesa (MD); ao setor industrial aeroespacial; às universidades e aos institutos de pesquisa. Os órgãos citados fazem parte do conjunto de executores dos projetos e atividades estratégicas do PNAE.</p>
+    </section>
     
-    <h2>Missão</h2>
+    <section class="miviva">
+        <div class="miviva_2">
+            <h2>Missão</h2>
+            <h3>Coordenar e fortalecer o setor espacial nacional para o desenvolvimento da sociedade</h3>
+        </div>
+        <div class="miviva_2">
+            <h2>Visão</h2>
+            <h3>Ser a instituição estrategica de Estado Responsavel por conectar aos desafios da sociedade</h3>
+        </div>
+        <div class="miviva_2">
+            <h2>Valores</h2>
+            <h3>Autonomia<br>Inovação<br>Integridade<br>Sustentabilidade<br>Inclusão</h3>
+        </div>
+    </section>
 
 </main>
 
-<!-- <footer>
+<footer>
     <h1 class="footer-name">AEB - Agência Espacial Brasileira © 2024</h1>
     <div id="social-links" class="social-links"></div>
     <div>
@@ -54,5 +95,5 @@
             });
         });
     </script>
-</footer> -->
+</footer>
 </html>

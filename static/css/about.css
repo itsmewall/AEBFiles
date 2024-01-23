@@ -37,12 +37,13 @@
     border-radius: 10px; /* Adiciona bordas arredondadas */
     background-color: white; /* Define a cor de fundo como branca */
     margin: 0 1%; /* Adiciona uma pequena margem entre as caixas */
+    width: 30vw; /* Define a largura da caixa */
+    height: auto; /* Define a altura da caixa */
 }
 
 .miviva_2 h2 {
     margin-bottom: 5%; /* Adiciona espaçamento abaixo do título */
     font-size: 30px;
-
 }
 
 .miviva_2 h3 {
@@ -55,3 +56,4 @@
     transform: scale(1.05); /* Efeito de escala ao passar o mouse */
     transition: transform 0.3s ease;
 }
+

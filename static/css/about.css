@@ -1,9 +1,11 @@
+
 .startabout{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
-    margin-top: 3%;
+    margin-top: 5%;
+    margin-left: 13%;
 }
 
 .startabout .img_aeb {
@@ -26,7 +28,7 @@
     justify-content: space-between;
     text-align: center;
     width: 50%;
-    margin: 3% auto; /* Adicionei 'auto' para centralizar o container horizontalmente */
+    margin: 3% 0% 0% 32%; /* Adicionei 'auto' para centralizar o container horizontalmente */
     color: black;
 }
 
@@ -34,7 +36,7 @@
     padding: 5%;
     display: flex;
     flex-direction: column;
-    border-radius: 10px; /* Adiciona bordas arredondadas */
+    border-radius: 10%; /* Adiciona bordas arredondadas */
     background-color: white; /* Define a cor de fundo como branca */
     margin: 0 1%; /* Adiciona uma pequena margem entre as caixas */
     width: 30vw; /* Define a largura da caixa */
@@ -57,3 +59,23 @@
     transition: transform 0.3s ease;
 }
 
+footer{
+    margin: 5% 0% 0% 6%;
+    width: 100%;
+    height: auto;
+}
+
+.img_aeb {
+    transition: filter 0.5s ease;
+}
+
+.escurecer {
+    filter: brightness(30%);
+}
+
+main{
+    background-image: url('/uploads/carousel/interestelar.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1000000000000000000000000000000000000000000000000000000000000000000000000000000;
+}

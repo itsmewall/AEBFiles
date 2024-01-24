@@ -1,95 +1,112 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pastas.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/tilt.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
-    <title>Sobre Nós</title>
-</head>
-
-<header>
-    <div class="logo-container">
-        <!-- <img src="{{ url_for('static', filename='images/logo-original.png') }}" alt="Logo" class="logo"> -->
-        <h1>AEB Files</h1>
-    </div>
-
-    <nav class="navbar">
-        <a href="{{ url_for('publicIndex') }}" class="navbar-item">Home</a>
-        <a href="{{ url_for('documents') }}" class="navbar-item">Documentos</a>
-        <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
-        <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
-    </nav>
-
-    <div class="menu-icon" id="menu-icon">
-        <span class="material-icons">menu</span>
-    </div>
-
-</header>
-
-<main>
-    <a href="{{ url_for('publicIndex') }}">Voltar para a página inicial</a>
-
-    <section class="startabout">
-        <h2>Quem somos</h2>
-        <img class="img_aeb" src="static\uploads\carousel\ac614a71-e84b-4b3d-a955-76acd3e71c7c.jpeg" alt="Frente AEB">
-        <div class="startabout_text">
-            <p>A Agência Espacial Brasileira (AEB), autarquia vinculada ao Ministério da Ciência, Tecnologia e Inovações  (MCTI), é a instituição responsável por formular, coordenar e executar a Política Espacial Brasileira. Desde a sua criação, em fevereiro de 1994, a Agência trabalha para empreender os esforços do governo brasileiro na promoção  da autonomia do setor espacial.</p>
-        </div>
-    </section>
+<body> 
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/pastas.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/tilt.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+        <title>Sobre Nós</title>
+    </head>
     
-    <section class="miviva">
-        <div class="miviva_2">
-            <h2>Missão</h2>
-            <h3>Coordenar e fortalecer o setor espacial nacional para o desenvolvimento da sociedade</h3>
+    <header>
+        <div class="logo-container">
+            <!-- <img src="{{ url_for('static', filename='images/logo-original.png') }}" alt="Logo" class="logo"> -->
+            <h1>AEB Files</h1>
         </div>
-        <div class="miviva_2">
-            <h2>Visão</h2>
-            <h3>Ser a instituição estrategica de Estado Responsavel por conectar aos desafios da sociedade</h3>
+        
+        <nav class="navbar">
+            <a href="{{ url_for('publicIndex') }}" class="navbar-item">Home</a>
+            <a href="{{ url_for('documents') }}" class="navbar-item">Documentos</a>
+            <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
+            <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
+        </nav>
+        
+        <div class="menu-icon" id="menu-icon">
+            <span class="material-icons">menu</span>
         </div>
-        <div class="miviva_2">
-            <h2>Valores</h2>
-            <h3>Autonomia<br>Inovação<br>Integridade<br>Sustentabilidade<br>Inclusão</h3>
-        </div>
-    </section>
-</main>
-
-<footer>
-    <h1 class="footer-name">AEB - Agência Espacial Brasileira © 2024</h1>
-    <div id="social-links" class="social-links"></div>
-    <div>
-        <img src="{{ url_for('static', filename='/images/assinatura_gov.png') }}" alt="Assinatura do Governo" class="footer-gov">
-    </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Obtém o elemento do rodapé
-            const footer = document.getElementById('social-links');
+        
+    </header>
     
-            // Array de objetos representando as redes sociais e seus links
-            const socialMediaLinks = [
-            { name: 'Facebook', url: 'https://www.facebook.com/agenciaespacialbrasileira/' },
-            { name: 'LinkedIn', url: 'https://br.linkedin.com/company/agencia-espacial-brasileira-oficial' },
-            { name: 'Instagram', url: 'https://www.instagram.com/agenciaespacialbrasileira/' }
-            ];
+    <div id="sidebar" class="sidebar">
+        <a href="#" onclick="closeMenu()" class="close-btn" style="display: none;">×</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('about') }}">Sobre</a>
+    </div>
 
-            // Adiciona os links ao rodapé
-            socialMediaLinks.forEach(link => {
-            const anchor = document.createElement('a');
-            anchor.href = link.url;
-            anchor.target = '_blank';
-            anchor.innerText = link.name;
-            footer.appendChild(anchor);
+    <main>
+        <section class="startabout">
+            <h2>Quem somos</h2>
+            <img class="img_aeb" src="static\uploads\carousel\ac614a71-e84b-4b3d-a955-76acd3e71c7c.jpeg" alt="Frente AEB">
+            <div class="startabout_text">
+                <p>A Agência Espacial Brasileira (AEB), autarquia vinculada ao Ministério da Ciência, Tecnologia e Inovações  (MCTI), é a instituição responsável por formular, coordenar e executar a Política Espacial Brasileira. Desde a sua criação, em fevereiro de 1994, a Agência trabalha para empreender os esforços do governo brasileiro na promoção  da autonomia do setor espacial.</p>
+            </div>
+        </section>
+        
+        <section class="miviva">
+            <div class="miviva_2">
+                <h2>Missão</h2>
+                <h3>Coordenar e fortalecer o setor espacial nacional para o desenvolvimento da sociedade</h3>
+            </div>
+            <div class="miviva_2">
+                <h2>Visão</h2>
+                <h3>Ser a instituição estrategica de Estado Responsavel por conectar aos desafios da sociedade</h3>
+            </div>
+            <div class="miviva_2">
+                <h2>Valores</h2>
+                <h3>Autonomia<br>Inovação<br>Integridade<br>Sustentabilidade<br>Inclusão</h3>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <h1 class="footer-name">AEB - Agência Espacial Brasileira © 2024</h1>
+        <div id="social-links" class="social-links"></div>
+        <div>
+            <img src="{{ url_for('static', filename='/images/assinatura_gov.png') }}" alt="Assinatura do Governo" class="footer-gov">
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Obtém o elemento do rodapé
+                const footer = document.getElementById('social-links');
+        
+                // Array de objetos representando as redes sociais e seus links
+                const socialMediaLinks = [
+                { name: 'Facebook', url: 'https://www.facebook.com/agenciaespacialbrasileira/' },
+                { name: 'LinkedIn', url: 'https://br.linkedin.com/company/agencia-espacial-brasileira-oficial' },
+                { name: 'Instagram', url: 'https://www.instagram.com/agenciaespacialbrasileira/' }
+                ];
 
+                // Adiciona os links ao rodapé
+                socialMediaLinks.forEach(link => {
+                const anchor = document.createElement('a');
+                anchor.href = link.url;
+                anchor.target = '_blank';
+                anchor.innerText = link.name;
+                footer.appendChild(anchor);
+
+                });
             });
+        </script>
+        
+    </footer>
+    <script>
+        window.addEventListener('scroll', function() {
+            var imagem = document.querySelector('.img_aeb');
+            var scrollPosition = window.scrollY;
+
+            if (scrollPosition > 100) { // ajuste este valor conforme necessário
+                imagem.classList.add('escurecer');
+            } else {
+                imagem.classList.remove('escurecer');
+            }
         });
     </script>
-</footer>
-
+</body>
 </html>

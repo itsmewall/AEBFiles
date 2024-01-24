@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/carrossel.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pastas.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tilt.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <title>Documentos</title>
+
+    <style>
+       .scroll-arrow {
+            position: fixed;
+            bottom: 20px;
+            right: 50%;
+            cursor: pointer;
+            animation: bounce 3s infinite;
+        }
+
+        .material-icons {
+            font-size: 36px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <!-- <img src="{{ url_for('static', filename='images/logo-original.png') }}" alt="Logo" class="logo"> -->
+            <h1>AEB Files</h1>
+        </div>
+        
+        <nav class="navbar">
+            <a href="{{ url_for('publicIndex') }}" class="navbar-item">Home</a>
+            <a href="{{ url_for('documents') }}" class="navbar-item">Documentos</a>
+            <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
+            <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
+        </nav>
+        
+        <div class="menu-icon" id="menu-icon">
+            <span class="material-icons">menu</span>
+        </div>
+        
+    </header>
+    
+    <div id="sidebar" class="sidebar">
+        <a href="#" onclick="closeMenu()" class="close-btn" style="display: none;">×</a>
+        <a href="{{ url_for('login') }}">Login</a>
+        <a href="{{ url_for('about') }}">Sobre</a>
+    </div>
+
+</body>
+</html>

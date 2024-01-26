@@ -1,0 +1,40 @@
+.formulario {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    margin: 7% 0% 3% 0%;
+}
+
+footer{
+    width: 100%;
+}
+
+form {
+    width: 300px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-top: 1%;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 2%;
+    margin-top: 1%;
+}
+
+input[type="submit"] {
+    margin-top: 2%;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}

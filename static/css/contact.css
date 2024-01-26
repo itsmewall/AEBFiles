@@ -2,10 +2,28 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    width: 100%;
+    height: auto;
+    width: auto;
+    margin-top: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
     flex-direction: column;
-    margin: 7% 0% 3% 0%;
+    padding: 2%;
+    background-color: rgb(3, 3, 81);
+    border: 1px solid rgb(161, 177, 244);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.formulario:active {
+    
+    transform: scale(0.95);
+}
+
+.ecc{
+    display: flex;
+    justify-content: center;
+    margin: 10% auto 0% auto;
 }
 
 footer{

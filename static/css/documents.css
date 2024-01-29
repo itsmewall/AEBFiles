@@ -1,0 +1,31 @@
+ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none; /* Adicionado para remover os marcadores */
+    justify-content: center;
+    padding: 1%;
+    border-radius: 10px; /* Alterado para bordas arredondadas */
+    width: auto;
+    height: auto;
+    gap: 5%;
+    margin: 10% 20% 5% 20%;
+}
+
+.areas {
+    background-color: rgb(62, 3, 255);
+    padding: 2%; /* Aumentado para dar mais espaço ao redor do texto */
+    margin: 1%; /* Adicionado para dar um pouco de espaço entre as caixas */
+    border: 1px solid rgb(173, 145, 238);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.areas:hover {
+    transform: scale(1.1);
+}
+
+a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+

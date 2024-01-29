@@ -4,26 +4,26 @@
     align-items: center;
     height: auto;
     width: auto;
-    margin-top: 10%;
+    margin-top: 5%;
     margin-left: 20%;
     margin-right: 20%;
     flex-direction: column;
     padding: 2%;
     background-color: rgb(3, 3, 81);
-    border: 1px solid rgb(161, 177, 244);
+    border: 1px solid rgb(63, 72, 106);
     border-radius: 10px;
     transition: transform 0.3s ease;
 }
 
 .formulario:active {
     
-    transform: scale(0.95);
+    transform: scale(0.90);
 }
 
 .ecc{
     display: flex;
     justify-content: center;
-    margin: 10% auto 0% auto;
+    margin: 7% auto 0% auto;
 }
 
 footer{
@@ -31,7 +31,7 @@ footer{
 }
 
 form {
-    width: 300px;
+    width: 75%;
     margin: 0 auto;
 }
 

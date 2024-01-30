@@ -15,7 +15,7 @@ header {
 }
 
 .logo-container {
-    margin-left: 20px;
+    margin-left: 1%;
     font-family: Orbitron, sans-serif;
 }
 
@@ -44,6 +44,9 @@ header {
 .logo {
     width: 100px;
     height: auto;
+    text-decoration: none;
+    color: white;
+    font-size: 40px;
 }
 
 .navbar {

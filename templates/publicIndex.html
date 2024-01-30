@@ -76,12 +76,12 @@
             <div class="container">
                 <div class="wrapper">
                     <div class="wrapper-holder elastic" id="carouselHolder">
-                        {% for index, image in carousel_images_with_index %}
-                            <div class="slider-img" id="slider-img-{{ index }}">
-                                <img src="{{ url_for('static', filename=image) }}" alt="Carousel Image">
+                        {% for image in carousel_images %}
+                            <div class="slider-img" id="slider-img-{{ loop.index }}">
+                                <img src="{{ url_for('serve_carousel_images', filename=image['filename']) }}" alt="Carousel Image">
                                 <div class="image-info">
-                                    <h2>Informações da Imagem</h2>
-                                    <p>Toda imagem terá sua etiqueta com informações de destaque!</p>
+                                    <h2>{{ image['filename'] }}</h2>
+                                    <p>Descrição da imagem do carrossel</p>
                                 </div>
                             </div>
                         {% endfor %}
@@ -91,7 +91,7 @@
             <div class="scroll-arrow" onclick="scrollToContent()">
                 <span class="material-icons">keyboard_arrow_down</span>
             </div>
-        </section>        
+        </section>
 
         <div class="pastas-container">
             <div class="pastas-texts">

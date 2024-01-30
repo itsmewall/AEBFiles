@@ -24,7 +24,7 @@
         <div class="card">
             <form action="/create_folder" method="post" autocomplete="off">
                 <label for="folderName">Nome da Pasta:</label>
-                <input type="text" id="folderName" name="folderName" required>
+                <input type="text" id="folderName" name="folder_name" required>        
         
                 <!-- Adicionando o toggle switch para permitir downloads -->
                 <div class="lanterna">
@@ -43,9 +43,15 @@
             </form>
         </div>        
     
-        <!-- Card 2: Upload de Arquivos -->
+       <!-- Card 2: Upload de Arquivos -->
         <div class="card">
             <form action="/upload" method="post" enctype="multipart/form-data">
+                <!-- Adicione campos para informações do documento -->
+                <label for="title">Título do Documento:</label>
+                <input type="text" id="title" name="title">
+                <label for="description">Descrição do Documento:</label>
+                <textarea id="description" name="description" maxlength="500"></textarea>
+
                 <label for="file">Selecione um arquivo:</label>
                 <input type="file" id="file" name="file" accept="*/*" required>
                 <label for="folder">Selecione a pasta:</label>

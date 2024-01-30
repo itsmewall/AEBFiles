@@ -18,7 +18,7 @@ CORS(app)
 app.secret_key = 'AEB'
 
 DATABASE_NAME = 'docs_info.db' 
-app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['UPLOAD_FOLDER'] = './static/uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'pdf', 'xlsx', 'xls'}
 
 def allowed_file(filename):
@@ -28,6 +28,26 @@ def get_images_from_folder(folder):
     folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder)
     images = [img for img in os.listdir(folder_path) if img.lower().endswith(('png', 'jpg', 'jpeg', 'gif'))]
     return images
+
+def get_folder_images(folder):
+    folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder)
+    images = [img for img in os.listdir(folder_path) if img.lower().endswith(('png', 'jpg', 'jpeg', 'gif'))]
+    return images
+
+def get_all_folders_with_images():
+    all_folders = {}
+    folders = [folder for folder in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isdir(os.path.join(app.config['UPLOAD_FOLDER'], folder))]
+    
+    for folder in folders:
+        images = get_folder_images(folder)
+        all_folders[folder] = {'images': images}
+
+    return all_folders
+
+def get_carousel_images():
+    folder_path = os.path.join(app.config['UPLOAD_FOLDER'], 'carousel')
+    images = [img for img in os.listdir(folder_path) if img.lower().endswith(('png', 'jpg', 'jpeg', 'gif'))]
+    return [{'filename': img, 'path': os.path.join('uploads', 'carousel', img).replace('\\', '/')} for img in images]
 
 def get_first_image_from_random_folder():
     folders = [folder for folder in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isdir(os.path.join(app.config['UPLOAD_FOLDER'], folder))]
@@ -66,14 +86,25 @@ def create_database():
     conn = sqlite3.connect(DATABASE_NAME)
     cursor = conn.cursor()
 
-    # Crie suas tabelas aqui
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS folder_info (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            folder_name TEXT NOT NULL,
+            info TEXT,
+            allow_downloads INTEGER
+        );
+    ''')
+
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS docs_info (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             doc_name TEXT NOT NULL,
             description TEXT,
             author TEXT,
-            date_uploaded TEXT
+            date_uploaded TEXT,
+            file_type TEXT,
+            file_path TEXT,
+            allow_downloads INTEGER
         );
     ''')
 
@@ -95,10 +126,7 @@ def populate_database():
     conn.commit()
     conn.close()
 
-# Chame a função para criar o banco de dados
 create_database()
-
-# Chame a função para popular o banco de dados
 populate_database()
 
 def get_all_images():
@@ -111,32 +139,29 @@ def get_all_images():
         decoded_images = [unquote(img) for img in images]
         all_images[folder] = {'full_paths': [os.path.join(folder_path, img) for img in decoded_images], 'info': {}}
 
-    return all_images
+        # Exemplo: use o nome da pasta como título e descrição
+        all_images[folder]['info'] = {'title': folder, 'description': f'Descrição da pasta {folder}'}
 
+    return all_images
 
 @app.route('/uploads/carousel/<filename>')
 def serve_carousel_images(filename):
-    return send_from_directory('/uploads/carousel', filename)
+    folder_path = os.path.join(app.config['UPLOAD_FOLDER'], 'carousel')
+    return send_from_directory(folder_path, filename)
 
 @app.route('/')
 def publicIndex():
     folders = [folder for folder in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isdir(os.path.join(app.config['UPLOAD_FOLDER'], folder))]
-
-    # Obtém todas as informações do banco de dados
+    
     doc_info_dict = get_all_doc_info()
-
-    # Adiciona as informações ao contexto do template
     app.jinja_env.globals.update(doc_info_dict=doc_info_dict)
 
-    # Get all images for each folder
     folder_images = get_all_images()
-
-    # Adiciona as informações das imagens ao contexto do template
     app.jinja_env.globals.update(folder_images=folder_images)
 
-    carousel_images_with_index = [(index, image.replace("\\", "/")) for index, image in enumerate(folder_images['carousel']['full_paths'])]
+    carousel_images = get_carousel_images()
 
-    return render_template('publicIndex.html', folders=folders, carousel_images_with_index=carousel_images_with_index)
+    return render_template('publicIndex.html', folders=folders, carousel_images=carousel_images)
 
 def obter_username_ldap(username, password):
     server = Server('ldap://192.168.0.83:389')
@@ -231,10 +256,21 @@ def show_folder(folder_name):
 @app.route('/create_folder', methods=['POST'])
 def create_folder():
     folder_name = request.form['folder_name']
+    folder_info = request.form['folderInfo']  # Obtém informações sobre a pasta
+    allow_downloads = 'allowDownloads' in request.form  # Verifica se "Permitir Downloads" está marcado
+
     folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name)
 
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
+
+    conn = sqlite3.connect(DATABASE_NAME)
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO folder_info (folder_name, info, allow_downloads) VALUES (?, ?, ?)",
+                   (folder_name, folder_info, allow_downloads))
+
+    conn.commit()
+    conn.close()
 
     return redirect(url_for('adminIndex'))
 
@@ -262,8 +298,25 @@ def upload_file():
         # Salvar o arquivo
         file.save(file_path)
 
-        
+        # Obter informações do formulário
+        title = request.form.get('title')
+        description = request.form.get('description')
+        author = session.get('ldap_username')
+        date_uploaded = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        file_type = request.form.get('fileType')
+        allow_downloads = 1 if request.form.get('allowDownloads') else 0
+
+        # Inserir informações no banco de dados
+        conn = sqlite3.connect(DATABASE_NAME)
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO docs_info (doc_name, description, author, date_uploaded, file_type, file_path, allow_downloads) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                       (filename, description, author, date_uploaded, file_type, file_path, allow_downloads))
+
+        conn.commit()
+        conn.close()
+
     return redirect(url_for('adminIndex'))
+
 
 @app.route('/view/<folder_name>/<image_name>')
 def view_image(folder_name, image_name):

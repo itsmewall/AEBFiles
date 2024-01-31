@@ -18,27 +18,27 @@
     <header>
         <div class="logo-container">
             <!-- <img src="{{ url_for('static', filename='images/logo-original.png') }}" alt="Logo" class="logo"> -->
-            <h1>AEB Files</h1>
+            <a href="{{ url_for('publicIndex') }}" class="logo">AEB Files</a>
         </div>
-        
+
         <nav class="navbar">
-            <a href="{{ url_for('publicIndex') }}" class="navbar-item">Home</a>
             <a href="{{ url_for('documents') }}" class="navbar-item">Documentos</a>
             <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
             <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
         </nav>
-        
+
         <div class="menu-icon" id="menu-icon">
             <span class="material-icons">menu</span>
         </div>
-        
+
     </header>
-    
+
     <div id="sidebar" class="sidebar">
         <a href="#" onclick="closeMenu()" class="close-btn" style="display: none;">×</a>
         <a href="{{ url_for('login') }}">Login</a>
         <a href="{{ url_for('about') }}">Sobre</a>
     </div>
+
 
     <main>
         <section class="startabout">

@@ -44,7 +44,9 @@ body {
 .wrap-input {
     position: relative;
     width: 100%;
-    margin-bottom: 35px;
+    margin-bottom: 5%;
+    display: flex;
+    flex-direction: row;
 }
 
 .icon {
@@ -57,7 +59,7 @@ body {
 }
 
 .input-form {
-    width: calc(100% - 20px);
+    width: calc(100% + 90%);
     padding: 10px;
     border: none;
     border-bottom: 1px solid #555; /* Cor da borda mais escura */
@@ -66,6 +68,7 @@ body {
     color: #ddd; /* Cor do texto mais claro */
     background-color: transparent;
     transition: border-color 0.3s;
+    margin-left: 15%;
 }
 
 .input-form:focus {
@@ -79,20 +82,22 @@ body {
     left: 0;
     width: 100%;
     padding: 10px;
-    color: #bbb; /* Cor do texto mais clara */
+    color: #9c9c9c; /* Cor do texto mais clara */
     transition: 0.5s;
     pointer-events: none;
+    margin: 0%;
 }
 
 .focus-input-form::after {
     content: '';
-    position: absolute;
+    position: relative;
     bottom: -1px;
     left: 0;
     width: 100%;
     height: 2px;
     background: #007bff; /* Cor de destaque */
     transition: 0.5s;
+    
 }
 
 .wrap-input.has-val .focus-input-form::before {
@@ -105,7 +110,27 @@ body {
 }
 
 .container-login-form-btn {
-    margin-top: 50px;
+    margin: 8.5% 0 0 0;
+}
+
+.container-back-form-btn{
+    margin: 4% 0 5% 0;
+}
+
+.back-form-btn:hover {
+    background: #0056b3; /* Cor de destaque ao passar o mouse */
+}
+
+.back-form-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background: #007bff; /* Cor do botão */
+    color: #fff; /* Cor do texto do botão */
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s;
 }
 
 .login-form-btn {

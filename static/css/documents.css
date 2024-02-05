@@ -1,3 +1,11 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: url('/static/images/nebula_brilho_reduzido.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 ul {
     display: flex;
     flex-direction: row;
@@ -8,20 +16,32 @@ ul {
     width: auto;
     height: auto;
     gap: 5%;
-    margin: 10% 20% 5% 20%;
+    margin: 5% 20% 5% 20%;
 }
 
 .areas {
-    background-color: rgb(62, 3, 255);
-    padding: 2%; /* Aumentado para dar mais espaço ao redor do texto */
-    margin: 1%; /* Adicionado para dar um pouco de espaço entre as caixas */
-    border: 1px solid rgb(173, 145, 238);
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    flex: 1;
+    width: 30%;
+    height: auto;
+    padding: 2.5%;
+
+    box-shadow: 0 0 20px rgb(0, 0, 0);
+    border-radius: 18px;
+
+    font-size: 20px;
+    color: #fff; /* Cor do texto claro */
+    background-color: rgba(0, 0, 0, 0.609);
+    backdrop-filter: blur(10%);
 }
 
 .areas:hover {
     transform: scale(1.1);
+    transition: 0.5s;
 }
 
 a {

@@ -53,59 +53,35 @@
             <a href="{{ url_for('documents') }}" class="navbar-item">Documentos</a>
             <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
             <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
+            <a href="{{ url_for('about') }}" class="navbar-item">Sobre</a>
         </nav>
-
-        <div class="menu-icon" id="menu-icon">
-            <span class="material-icons">menu</span>
+        <div>   
+            <a href="{{ url_for('login') }}" class="navbar-item">Login</a>
         </div>
-
     </header>
 
-    <div id="sidebar" class="sidebar">
-        <a href="#" onclick="closeMenu()" class="close-btn" style="display: none;">×</a>
-        <a href="{{ url_for('login') }}">Login</a>
-        <a href="{{ url_for('about') }}">Sobre</a>
-    </div>
-
-
     <main>
-        <nav class="navseleção">
-            <ul>
-                <div class="areas">
-                    <li><a href="{{ url_for('documents') }}">Todos</a></li>
-                </div>
-                <div class="areas">
-                    <li><a href="{{ url_for('documents', category='DPOA') }}">DPOA</a></li>
-                </div>
-                <div class="areas">
-                    <li><a href="{{ url_for('documents', category='DSEG') }}">DSEG</a></li>
-                </div>
-                <div class="areas">
-                    <li><a href="{{ url_for('documents', category='DGEP') }}">DGEP</a></li>
-                </div>
-                <div class="areas">   
-                    <li><a href="{{ url_for('documents', category='DIEN') }}">DIEN</a></li>
-                </div>
-                <div class="areas">
-                    <li><a href="{{ url_for('documents', category='GAB') }}">GAB</a></li>
-                </div>
-                <div class="areas">
-                    <li><a href="{{ url_for('documents', category='AUDIN') }}">AUDIN</a></li>
-                </div>
-                <div class="areas">
-                    <li><a href="{{ url_for('documents', category='ARI') }}">ARI</a></li>
-                </div>
-                <div class="areas">
-                    <li><a href="{{ url_for('documents', category='ACI') }}">ACI</a></li>
-                </div> 
-            </ul>
-        </nav>
+        <section>
 
+            <nav class="navseleção">
+                <ul>
+                    <div class="areas">
+                        <li><a href="{{ url_for('documents', category='Todos') }}">Todos</a></li>
+                    </div>
+                    <div class="areas">
+                        <li><a href="{{ url_for('documents', category='Institucional') }}">Institucional</a></li>
+                    </div>
+                    <div class="areas">
+                        <li><a href="{{ url_for('documents', category='Espacial') }}">Espacial</a></li>
+                    </div>
+                    <div class="areas">
+                        <li><a href="{{ url_for('documents', category='Corporativo') }}">Corporativo</a></li>
+                    </div>
+                </ul>
+            </nav>
+        </section>
+        
         <div class="pastas-container">
-            <div class="pastas-texts">
-                <p class="text-pasta">Acesse arquivos da AEB</p>
-                <h1 class="h1-pasta">Pastas Compartilhadas</h1>
-            </div>
             <section class="pastas" id="pastas">
                     <div class="cards-container">
                         {% for folder in folders %}

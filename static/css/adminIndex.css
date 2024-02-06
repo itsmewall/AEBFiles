@@ -15,7 +15,10 @@ header {
 main {
     padding: 20px;
 }
-
+a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
 .card {
     background-color: #f4f4f4;
     border-radius: 8px;

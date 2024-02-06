@@ -1,58 +1,31 @@
+body{
+    background: url('/static/images/nebula_brilho_reduzido.png');
+}
+
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .formulario {
     display: flex;
+    width: 30%;
+    max-width: 40%;
+    height: auto;
+    overflow: hidden;
     justify-content: center;
     align-items: center;
-    height: auto;
-    width: auto;
-    margin-top: 5%;
-    margin-left: 20%;
-    margin-right: 20%;
-    flex-direction: column;
-    padding: 2%;
-    background-color: rgb(3, 3, 81);
-    border: 1px solid rgb(63, 72, 106);
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+    color: #fff; /* Cor do texto claro */
+    flex: 1;
+    padding: 2%; /* alterado de 30px para 5% */
+    background-color: rgba(0, 0, 0, 0.609);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 20px rgb(0, 0, 0);
+    border-radius: 18px;
 }
 
-.formulario:active {
-    
-    transform: scale(0.90);
-}
-
-.ecc{
-    display: flex;
-    justify-content: center;
-    margin: 7% auto 0% auto;
-}
-
-footer{
-    width: 100%;
-}
-
-form {
-    width: 75%;
-    margin: 0 auto;
-}
-
-label {
-    display: block;
-    margin-top: 1%;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 2%;
-    margin-top: 1%;
-}
-
-input[type="submit"] {
-    margin-top: 2%;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049;
+a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }

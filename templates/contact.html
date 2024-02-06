@@ -48,45 +48,28 @@
             <!-- <img src="{{ url_for('static', filename='images/logo-original.png') }}" alt="Logo" class="logo"> -->
             <a href="{{ url_for('publicIndex') }}" class="logo">AEB Files</a>
         </div>
-
         <nav class="navbar">
             <a href="{{ url_for('documents') }}" class="navbar-item">Documentos</a>
             <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
             <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
+            <a href="{{ url_for('about') }}" class="navbar-item">Sobre</a>
         </nav>
-
-        <div class="menu-icon" id="menu-icon">
-            <span class="material-icons">menu</span>
+        <div>   
+            <a href="{{ url_for('login') }}" class="navbar-item">Login</a>
         </div>
-
     </header>
-
-    <div id="sidebar" class="sidebar">
-        <a href="#" onclick="closeMenu()" class="close-btn" style="display: none;">×</a>
-        <a href="{{ url_for('login') }}">Login</a>
-        <a href="{{ url_for('about') }}">Sobre</a>
+    <div class="pastas-texts">
+        <p class="text-pasta">Entre em</p>
+        <h1 class="h1-pasta">Contato</h1>
     </div>
-
-
     <main>
-        <div class="ecc">
-            <h1>Entre em Contato Conosco</h1>
-        </div>
         <section class="formulario">
             <form>
-                <label for="nome">Nome:*</label>
-                <input type="text" id="nome" name="nome">
                 
-                <label for="email">Email:*</label>
-                <input type="email" id="email" name="email">
-               
-                <label for="assunto">Assunto:</label>
-                <textarea id="assunto" name="assunto"></textarea>
-
-                <label for="mensagem">Mensagem:</label>
-                <textarea id="mensagem" name="mensagem"></textarea>
-
-                <input type="submit" value="Enviar">
+                
+                <div class="button_voltar">
+                    <button class="back-form-btn" >Voltar</button>
+                </div>
             </form>
         </section>
     </main>
@@ -120,83 +103,9 @@
                 });
             });
         </script>
-        
     </footer>
 
-    <script>
-        $(document).ready(function () {
-            $("#menu-icon").click(function () {
-                const sidebar = $("#sidebar");
-                const menuIcon = $("#menu-icon span");
-
-                if (sidebar.width() === 300) {
-                    sidebar.animate({ width: "0" }, 500);
-                    menuIcon.removeClass("rotate");
-                    setTimeout(function () {
-                        menuIcon.text("menu");
-                    }, 250);
-                } else {
-                    sidebar.animate({ width: "300px" }, 500);
-                    menuIcon.addClass("rotate");
-                    setTimeout(function () {
-                        menuIcon.text("clear");
-                    }, 250);
-                }
-            });
-
-            // Fechar o menu ao clicar fora dele
-            $(document).click(function (event) {
-                const sidebar = $("#sidebar");
-                const menuIcon = $("#menu-icon span");
-
-                if (!sidebar.is(event.target) && sidebar.has(event.target).length === 0 &&
-                    !menuIcon.is(event.target) && menuIcon.has(event.target).length === 0) {
-                    sidebar.animate({ width: "0" }, 500);
-                    menuIcon.removeClass("rotate");
-                    setTimeout(function () {
-                        menuIcon.text("menu");
-                    }, 250);
-                }
-            });
-        });
-
-        $(document).ready(function () {
-            // Função para verificar se a seta deve ser exibida
-            function checkArrowVisibility() {
-                const carrosselSection = $("#carrossel");
-                const scrollArrow = $(".scroll-arrow");
-
-                const isScrolledIntoView = (elem) => {
-                    const docViewTop = $(window).scrollTop();
-                    const docViewBottom = docViewTop + $(window).height();
-                    const elemTop = $(elem).offset().top;
-                    const elemBottom = elemTop + $(elem).height();
-                    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-                };
-
-                // Se a seção do carrossel estiver visível, mostra a seta, caso contrário, oculta.
-                if (isScrolledIntoView(carrosselSection)) {
-                    scrollArrow.show();
-                } else {
-                    scrollArrow.hide();
-                }
-            }
-
-            // Chame a função na inicialização e em eventos de rolagem
-            checkArrowVisibility();
-
-            // Atualize a visibilidade da seta quando a página for rolada
-            $(window).scroll(function () {
-                checkArrowVisibility();
-            });
-
-            // Role a página até o conteúdo ao clicar na seta
-            $(".scroll-arrow").click(function () {
-                const targetSection = $(".pastas");  // Substitua pelo seletor do destino desejado
-                $("html, body").animate({ scrollTop: targetSection.offset().top }, 1000);
-            });
-        });
-    </script>
+    
 
 </body>
 </html>

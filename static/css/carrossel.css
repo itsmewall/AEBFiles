@@ -13,7 +13,10 @@
     border-radius: 2%;
     overflow: hidden;
 }
-
+a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
 .wrapper-holder {
     display: grid;
     grid-template-columns: repeat(10, 100%);

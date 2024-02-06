@@ -52,19 +52,12 @@
             <a href="{{ url_for('documents') }}" class="navbar-item">Documentos</a>
             <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
             <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
+            <a href="{{ url_for('about') }}" class="navbar-item">Sobre</a>
         </nav>
-
-        <div class="menu-icon" id="menu-icon">
-            <span class="material-icons">menu</span>
+        <div>   
+            <a href="{{ url_for('login') }}" class="navbar-item">Login</a>
         </div>
-
     </header>
-
-    <div id="sidebar" class="sidebar">
-        <a href="#" onclick="closeMenu()" class="close-btn" style="display: none;">×</a>
-        <a href="{{ url_for('login') }}">Login</a>
-        <a href="{{ url_for('about') }}">Sobre</a>
-    </div>
 
     <main>
         <div class="background">

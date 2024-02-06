@@ -18,7 +18,10 @@
     width: 50%;
     margin: 2% auto 1% auto; /* Adicionei 'auto' para centralizar o container horizontalmente */
 }
-
+a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
 
 
 .miviva {

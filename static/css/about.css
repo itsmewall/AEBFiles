@@ -1,3 +1,14 @@
+body{
+    background: url('/static/images/nebula_brilho_reduzido.png');
+}
+
+.pastas-texts{
+    margin-top: 5%;
+}
+
+h2{
+    font-family: Orbitron, sans-serif;
+}
 
 .startabout{
     display: flex;

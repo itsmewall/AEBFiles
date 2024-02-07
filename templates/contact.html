@@ -42,6 +42,7 @@
 
     </style>
 </head>
+
 <body>
     <header>
         <div class="logo-container">
@@ -77,34 +78,43 @@
     <footer>
         <h1 class="footer-name">AEB - Agência Espacial Brasileira © 2024</h1>
         <div id="social-links" class="social-links"></div>
-        <div>
-            <img src="{{ url_for('static', filename='/images/assinatura_gov.png') }}" alt="Assinatura do Governo" class="footer-gov">
-        </div>
+        <section class="footer-gov">   
+            <div>
+                <img src="{{ url_for('static', filename='/images/Logo_PEB_transp.png') }}" alt="Logo PEB" class="PEB">
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='/images/logo-original.png') }}" alt="Logo AEB" class="AEB">
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='/images/MCTI.png') }}" alt="Logo MCTI" class="MCTI">
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='/images/GOVBR.png') }}" alt="Logo GOVBR" class="GOVBR">
+            </div>
+        </section>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // Obtém o elemento do rodapé
                 const footer = document.getElementById('social-links');
-        
+    
                 // Array de objetos representando as redes sociais e seus links
                 const socialMediaLinks = [
-                { name: 'Facebook', url: 'https://www.facebook.com/agenciaespacialbrasileira/' },
-                { name: 'LinkedIn', url: 'https://br.linkedin.com/company/agencia-espacial-brasileira-oficial' },
-                { name: 'Instagram', url: 'https://www.instagram.com/agenciaespacialbrasileira/' }
+                    { name: 'Facebook', url: 'https://www.facebook.com/agenciaespacialbrasileira/' },
+                    { name: 'LinkedIn', url: 'https://br.linkedin.com/company/agencia-espacial-brasileira-oficial' },
+                    { name: 'Instagram', url: 'https://www.instagram.com/agenciaespacialbrasileira/' }
                 ];
-
+    
                 // Adiciona os links ao rodapé
                 socialMediaLinks.forEach(link => {
-                const anchor = document.createElement('a');
-                anchor.href = link.url;
-                anchor.target = '_blank';
-                anchor.innerText = link.name;
-                footer.appendChild(anchor);
-
+                    const anchor = document.createElement('a');
+                    anchor.href = link.url;
+                    anchor.target = '_blank';
+                    anchor.innerText = link.name;
+                    footer.appendChild(anchor);
                 });
             });
         </script>
     </footer>
-
     
 
 </body>

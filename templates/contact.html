@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icone?family=Material+Icons">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/carrossel.css') }}">
@@ -49,25 +49,54 @@
             <!-- <img src="{{ url_for('static', filename='images/logo-original.png') }}" alt="Logo" class="logo"> -->
             <a href="{{ url_for('publicIndex') }}" class="logo">AEB Files</a>
         </div>
+
         <nav class="navbar">
             <a href="{{ url_for('documents') }}" class="navbar-item">Documentos</a>
             <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
             <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
             <a href="{{ url_for('about') }}" class="navbar-item">Sobre</a>
         </nav>
-        <div>   
-            <a href="{{ url_for('login') }}" class="navbar-item">Login</a>
+
+        <div class="login_margin">
+            <a href="{{ url_for('login') }}" class="navbar-item_2">Login</a>
         </div>
+        
     </header>
+
     <div class="pastas-texts">
         <p class="text-pasta">Entre em</p>
         <h1 class="h1-pasta">Contato</h1>
     </div>
+
     <main>
         <section class="formulario">
             <form>
                 <div class="button_voltar">
-                    <button class="back-form-btn" >Voltar</button>
+
+                    <div>
+                        <input class="box_digitação" type="text" name="name" autocomplete="off" id="name">
+                        <span class="name_inside" data-placeholder="NOME"></span>
+                    </div>
+
+                    <div>
+                        <input class="box_digitação" type="password" name="password" id="password">
+                        <span class="name_inside" data-placeholder="Email"></span>
+                    </div>
+
+                    <div>
+                        <input class="box_digitação" type="text" name="username" autocomplete="off" id="username">
+                        <span class="name_inside" data-placeholder="Assunto"></span>
+                    </div>
+
+                    <div>
+                        <input class="box_digitação" type="Mensagem" name="Mensagem" id="Mensagem">
+                        <span class="name_inside" data-placeholder="Mensagem"></span>
+                    </div>
+
+                    <div>
+                        <button class="button_enviar" >Enviar</button>
+                        <button class="button_voltar" >Voltar</button>
+                    </div>
                 </div>
             </form>
         </section>

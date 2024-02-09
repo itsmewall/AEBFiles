@@ -8,9 +8,26 @@ main{
     justify-content: center;
 }
 
+.pastas-texts {
+    margin: 8% 0% 2% 13%;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+}
+.pastas-container .pastas-text p {
+    font-weight: lighter;
+    color: white;
+    text-decoration: none;
+}
+
+.pastas-container .pastas-text h1 {
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
 .formulario {
     display: flex;
-    width: 30%;
+    width: auto;
     max-width: 40%;
     height: auto;
     overflow: hidden;
@@ -18,7 +35,7 @@ main{
     align-items: center;
     color: #fff; /* Cor do texto claro */
     flex: 1;
-    padding: 2%; /* alterado de 30px para 5% */
+    padding: 1%; /* alterado de 30px para 5% */
     background-color: rgba(0, 0, 0, 0.609);
     backdrop-filter: blur(5px);
     box-shadow: 0 0 20px rgb(0, 0, 0);
@@ -28,4 +45,81 @@ main{
 a {
     color: rgb(255, 255, 255);
     text-decoration: none;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 2%;
+    justify-content: space-between;
+
+}
+
+.forms-box{
+    display: flex;
+    height: 100%;
+    width: auto;
+    flex-direction: row;
+    margin-top: 1%;
+}
+
+.forms-box-input{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 2%;
+    justify-content: space-between;
+}
+
+label{
+    display: flex;
+    justify-content: left;
+    margin-top: 15%;
+}
+
+.box_digitação{
+    width: 100%;
+    padding: 2%;
+    border: none;
+    border-bottom: 1px solid #555; /* Cor da borda mais escura */
+    outline: none;
+    font-size: 16px;
+    color: #ddd; /* Cor do texto mais claro */
+    background-color: transparent;
+    transition: border-color 0.3s;
+    margin-left: 1%;
+}
+
+.box_digitação:focus {
+    border-color: #007bff; /* Cor da borda ao focar */
+}
+
+.button_enviar {
+    width: 100%;
+    padding: 1%;
+    border: none;
+    border-radius: 5px;
+    background: #007bff; /* Cor do botão */
+    color: #fff; /* Cor do texto do botão */
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s;
+    margin: 5% auto 0.5% auto;
+    justify-content: right;
+
+}
+
+.button_enviar:hover {
+    background: #0056b3; /* Cor de destaque ao passar o mouse */
+}
+
+label {
+    display: flex;
+    font-family: 'Orbitron', sans-serif;
+    text-align: right; /* Alinhe o texto à direita */
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end; /* Alinhe os itens à direita */ /* Adicione espaço à direita para os rótulos */
+    margin-left: -10%;
 }

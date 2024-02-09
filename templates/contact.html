@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/carrossel.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/pastas.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tilt.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
@@ -71,35 +70,40 @@
     <main>
         <section class="formulario">
             <form>
-                <div class="button_voltar">
-
+                <div class="forms-box">
                     <div>
-                        <input class="box_digitação" type="text" name="name" autocomplete="off" id="name">
-                        <span class="name_inside" data-placeholder="NOME"></span>
+                        <label for="name">Nome:</label>
                     </div>
-
+                    <input class="box_digitação" type="text" name="name" id="name" autocomplete="off">
+                </div>
+        
+                <div class="forms-box">
                     <div>
-                        <input class="box_digitação" type="password" name="password" id="password">
-                        <span class="name_inside" data-placeholder="Email"></span>
+                        <label for="email">Email:</label>
                     </div>
-
+                    <input class="box_digitação" type="text" name="email" id="email">
+                </div>
+        
+                <div class="forms-box">
                     <div>
-                        <input class="box_digitação" type="text" name="username" autocomplete="off" id="username">
-                        <span class="name_inside" data-placeholder="Assunto"></span>
+                        <label for="assunto">Assunto:</label>
                     </div>
-
+                    <input class="box_digitação" type="text" name="assunto" id="assunto" autocomplete="off">
+                </div>
+        
+                <div class="forms-box">
                     <div>
-                        <input class="box_digitação" type="Mensagem" name="Mensagem" id="Mensagem">
-                        <span class="name_inside" data-placeholder="Mensagem"></span>
+                        <label for="mensagem">Mensagem:</label>
                     </div>
-
-                    <div>
-                        <button class="button_enviar" >Enviar</button>
-                        <button class="button_voltar" >Voltar</button>
-                    </div>
+                    <textarea class="box_digitação" name="mensagem" id="mensagem"></textarea>
+                </div>
+                
+                <div class="button_box">
+                    <button class="button_enviar">Enviar</button>
                 </div>
             </form>
         </section>
+        
     </main>
 
     <footer>

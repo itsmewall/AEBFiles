@@ -22,10 +22,12 @@ body {
     border-radius: 18px;
     color: #fff; /* Cor do texto claro */
 }
+
 a {
     color: rgb(255, 255, 255);
     text-decoration: none;
 }
+
 .login-section {
     flex: 1;
     padding: 4%; /* alterado de 30px para 5% */

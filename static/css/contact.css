@@ -6,6 +6,7 @@ main{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: auto auto auto auto;
 }
 
 .pastas-texts {
@@ -40,6 +41,7 @@ main{
     backdrop-filter: blur(5px);
     box-shadow: 0 0 20px rgb(0, 0, 0);
     border-radius: 18px;
+    margin: 2% 0% 4% 0%;
 }
 
 a {
@@ -61,7 +63,7 @@ form{
     height: 100%;
     width: auto;
     flex-direction: row;
-    margin-top: 1%;
+    margin-top: 3%;
 }
 
 .forms-box-input{
@@ -75,9 +77,16 @@ form{
 label{
     display: flex;
     justify-content: left;
-    margin-top: 15%;
+    margin-top: 17%;
 }
 
+.button_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6%;
+    margin-bottom: 2%;
+}
 .box_digitação{
     width: 100%;
     padding: 2%;
@@ -96,8 +105,8 @@ label{
 }
 
 .button_enviar {
-    width: 100%;
-    padding: 1%;
+    width: 80%;
+    padding: 3% 0% 3% 0%;
     border: none;
     border-radius: 5px;
     background: #007bff; /* Cor do botão */
@@ -105,7 +114,6 @@ label{
     cursor: pointer;
     font-size: 18px;
     transition: background 0.3s;
-    margin: 5% auto 0.5% auto;
     justify-content: right;
 
 }

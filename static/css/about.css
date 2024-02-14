@@ -3,7 +3,7 @@ body{
 }
 
 .pastas-texts{
-    margin-top: 5%;
+    margin-top: 8% ;
 }
 
 h2{
@@ -40,30 +40,35 @@ a {
     flex-direction: row;
     justify-content: space-between;
     text-align: center;
-    width: 50%;
+    width: 70%;
     margin: 3% auto; /* Adicionei 'auto' para centralizar o container horizontalmente */
     color: black;
+    margin-bottom: 10%;
 }
 
 .miviva_2 {
-    padding: 5%;
+    padding: 2% 1% 2% 1%;   
     display: flex;
     flex-direction: column;
-    border-radius: 10%; /* Adiciona bordas arredondadas */
-    background-color: white; /* Define a cor de fundo como branca */
-    margin: 0 1%; /* Adiciona uma pequena margem entre as caixas */
-    width: 30vw; /* Define a largura da caixa */
-    height: auto; /* Define a altura da caixa */
+    margin: 0 3%; 
+    width: 30vw;
+    height: auto; 
+    box-shadow: 0 0 20px rgb(0, 0, 0);
+    border-radius: 18px;
+    color: #fff; /* Cor do texto claro */
+    background-color: rgba(0, 0, 0, 0.609);
+    backdrop-filter: blur(10%);
 }
 
 .miviva_2 h2 {
-    margin-bottom: 5%; /* Adiciona espaçamento abaixo do título */
+    margin: 5% 0% 10% 0% ;  
     font-size: 30px;
 }
 
 .miviva_2 h3 {
     margin: 0; /* Remove a margem padrão dos parágrafos */
     font-weight: normal;
+    font-size: 20px;
 }
 
 /* Estilos adicionais para melhorar a aparência */

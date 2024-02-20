@@ -1,6 +1,8 @@
-body{
-    background: url('/static/images/nebula_brilho_reduzido.png');
-}
+/* 
+
+NÃO ADICIONAR IMAGENS OU CORES DE FUNDO!!!
+
+*/
 
 main{
     display: flex;

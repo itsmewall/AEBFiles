@@ -65,6 +65,17 @@ def get_first_image_from_random_folder():
     else:
         return None
 
+def get_admin_defined_cover_image(folder_name):
+    conn = sqlite3.connect(DATABASE_NAME)
+    cursor = conn.cursor()
+    cursor.execute("SELECT cover_image FROM folder_info WHERE folder_name = ?", (folder_name,))
+    result = cursor.fetchone()
+    conn.close()
+    if result and result[0]:
+        return result[0]
+    else:
+        return None
+
 def get_all_doc_info():
     conn = sqlite3.connect(DATABASE_NAME)
     cursor = conn.cursor()
@@ -86,32 +97,33 @@ def create_database():
     conn = sqlite3.connect(DATABASE_NAME)
     cursor = conn.cursor()
 
+    # Cria as tabelas, se não existirem
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS folder_info (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            folder_name TEXT NOT NULL,
-            info TEXT,
-            allow_downloads INTEGER
-        );
+    CREATE TABLE IF NOT EXISTS folder_info (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        folder_name TEXT NOT NULL,
+        info TEXT,
+        allow_downloads INTEGER,
+        cover_image TEXT
+    );
     ''')
 
     cursor.execute('''
-        CREATE TABLE IF NOT EXISTS docs_info (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            doc_name TEXT NOT NULL,
-            description TEXT,
-            author TEXT,
-            date_uploaded TEXT,
-            file_type TEXT,
-            file_path TEXT,
-            allow_downloads INTEGER
-        );
+    CREATE TABLE IF NOT EXISTS docs_info (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        doc_name TEXT NOT NULL,
+        description TEXT,
+        author TEXT,
+        date_uploaded TEXT,
+        file_type TEXT,
+        file_path TEXT,
+        allow_downloads INTEGER
+    );
     ''')
 
     # Commit e fechar a conexão
     conn.commit()
     conn.close()
-create_database()
 
 
 def populate_database():
@@ -135,13 +147,16 @@ def get_all_images():
 
     for folder in folders:
         folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder)
-        images = [img for img in os.listdir(folder_path) if img.lower().endswith(('png', 'jpg', 'jpeg', 'gif'))]
-        decoded_images = [unquote(img) for img in images]
-        all_images[folder] = {'full_paths': [os.path.join(folder_path, img) for img in decoded_images], 'info': {}}
-
-        # Exemplo: use o nome da pasta como título e descrição
-        all_images[folder]['info'] = {'title': folder, 'description': f'Descrição da pasta {folder}'}
-
+        images = sorted([img for img in os.listdir(folder_path) if img.lower().endswith(('png', 'jpg', 'jpeg', 'gif'))])
+        # Verifica se uma imagem de capa foi definida pelo admin
+        cover_image = get_admin_defined_cover_image(folder)
+        # Se nenhuma imagem de capa foi definida pelo admin, tenta usar a primeira imagem da pasta
+        if not cover_image and images:
+            cover_image = images[0]
+        # Se ainda não temos uma imagem de capa, usar a imagem padrão
+        if not cover_image:
+            cover_image = 'default/default.png'  # Ajuste para o caminho correto da sua imagem padrão
+        all_images[folder] = {'cover_image': cover_image, 'images': images}
     return all_images
 
 @app.route('/uploads/carousel/<filename>')

@@ -5,10 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/adminIndex.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/space_background.css') }}">
     <title>AEB Files Admin</title>
     <!-- Adicione aqui seus links para folhas de estilo, scripts, etc. -->
 </head>
 <body>
+
+    <div class="stars-container"></div>
+    <div class="wave">
 
 <!-- 1. Header -->
 <header>
@@ -43,28 +47,27 @@
             </form>
         </div>        
     
-       <!-- Card 2: Upload de Arquivos -->
+      <!-- Card 2: Upload de Arquivos -->
         <div class="card">
             <form action="/upload" method="post" enctype="multipart/form-data">
-                <!-- Adicione campos para informações do documento -->
-                <label for="title">Título do Documento:</label>
-                <input type="text" id="title" name="title">
-                <label for="description">Descrição do Documento:</label>
-                <textarea id="description" name="description" maxlength="500"></textarea>
-
+                <!-- Campos existentes -->
                 <label for="file">Selecione um arquivo:</label>
                 <input type="file" id="file" name="file" accept="*/*" required>
                 <label for="folder">Selecione a pasta:</label>
                 <select id="folder" name="folder">
                     {% for folder in folders %}
-                        <option class="option-select" value="{{ folder }}">{{ folder }}</option>
+                        <option value="{{ folder }}">{{ folder }}</option>
                     {% endfor %}
                 </select>
-                <label for="fileType">Tipo de Arquivo:</label>
-                <input type="text" id="fileType" name="fileType">
+                <!-- Novo campo para definir como imagem de capa -->
+                <div class="checkbox">
+                    <input type="checkbox" id="setAsCover" name="setAsCover">
+                    <label for="setAsCover">Definir como imagem de capa da pasta</label>
+                </div>
                 <button type="submit">Upload</button>
             </form>
         </div>
+
 
         <!-- Card 3: Informações do Arquivo -->
         <div class="card">
@@ -96,7 +99,7 @@
     </div>
 </main>
 
-<!-- Adicione aqui seus scripts, se necessário -->
+<script src="{{ url_for('static', filename='js/stars.js') }}"></script>
 
 </body>
 </html>

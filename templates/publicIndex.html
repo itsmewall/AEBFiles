@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/pastas.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tilt.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/space_background.css') }}">
     <title>AEB Files</title>
 
     <style>
@@ -42,205 +43,208 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <!-- <img src="{{ url_for('static', filename='images/logo-original.png') }}" alt="Logo" class="logo"> -->
-            <a href="{{ url_for('publicIndex') }}" class="logo">AEB Files</a>
-        </div>
+    <div class="stars-container"></div>
+    <div class="wave">
 
-        <nav class="navbar">
-            <a href="{{ url_for('documents') }}" class="navbar-item">Documentos</a>
-            <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
-            <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
-            <a href="{{ url_for('about') }}" class="navbar-item">Sobre</a>
-        </nav>
+        <header>
+            <div class="logo-container">
+                <!-- <img src="{{ url_for('static', filename='images/logo-original.png') }}" alt="Logo" class="logo"> -->
+                <a href="{{ url_for('publicIndex') }}" class="logo">AEB Files</a>
+            </div>
 
-        <div class="login_margin">
-            <a href="{{ url_for('login') }}" class="navbar-item_2">Login</a>
-        </div>
-        
-    </header>
+            <nav class="navbar">
+                <a href="{{ url_for('documents') }}" class="navbar-item">Documentos</a>
+                <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
+                <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
+                <a href="{{ url_for('about') }}" class="navbar-item">Sobre</a>
+            </nav>
 
-    <main>
-        <div class="background">
-            <img src="{{ url_for('static', filename='./images/sky.jpg') }}" alt="Imagem Fixa">
-        </div>
+            <div class="login_margin">
+                <a href="{{ url_for('login') }}" class="navbar-item_2">Login</a>
+            </div>
+            
+        </header>
 
-        <section class="carrossel" id="carrossel">
-            <div class="container">
-                <div class="wrapper">
-                    <div class="wrapper-holder elastic" id="carouselHolder">
-                        {% for image in carousel_images %}
-                            <div class="slider-img" id="slider-img-{{ loop.index }}">
-                                <img src="{{ url_for('serve_carousel_images', filename=image['filename']) }}" alt="Carousel Image">
-                                <div class="image-info">
-                                    <h2>{{ image['filename'] }}</h2>
-                                    <p>Descrição da imagem do carrossel</p>
+        <main>
+            <div class="background" style="display: none;">
+                <img src="{{ url_for('static', filename='./images/sky.jpg') }}" alt="Imagem Fixa">
+            </div>
+
+            <section class="carrossel" id="carrossel">
+                <div class="container">
+                    <div class="wrapper">
+                        <div class="wrapper-holder elastic" id="carouselHolder">
+                            {% for image in carousel_images %}
+                                <div class="slider-img" id="slider-img-{{ loop.index }}">
+                                    <img src="{{ url_for('serve_carousel_images', filename=image['filename']) }}" alt="Carousel Image">
+                                    <div class="image-info">
+                                        <h2>{{ image['filename'] }}</h2>
+                                        <p>Descrição da imagem do carrossel</p>
+                                    </div>
                                 </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="scroll-arrow" onclick="scrollToContent()">
-                <span class="material-icons">keyboard_arrow_down</span>
-            </div>
-        </section>
-
-        <div class="pastas-container">
-            <div class="pastas-texts">
-                <p class="text-pasta">Acesse arquivos da AEB</p>
-                <h1 class="h1-pasta">Pastas Compartilhadas</h1>
-            </div>
-            <section class="pastas" id="pastas">
-                    <div class="cards-container">
-                        {% for folder in folders %}
-                            <a href="{{ url_for('show_folder', folder_name=folder) }}" class="card tilt">
-                                <div class="foto">
-                                    {% if folder_images[folder] and folder_images[folder]['images'] %}
-                                        {% set cover_image_path = url_for('static', filename='uploads/' + folder + '/images/' + folder_images[folder]['images'][0]) %}
-                                        <img src="{{ cover_image_path }}" alt="Capa do Card">
-                                    {% else %}
-                                        {% set cover_image_path = url_for('static', filename='path_para_sua_imagem_default.jpg') %}
-                                        <img src="{{ cover_image_path }}" alt="Capa do Card Padrão">
-                                    {% endif %}
-                                    <p>{{ folder }}</p>
-                                </div>
-                            </a>
-                        {% endfor %}
-                    </div>
-                <script src="/static/js/vanilla-tilt.js"></script>
-
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        VanillaTilt.init(document.querySelectorAll('.tilt'), {
-                            max: 15,
-                            speed: 500
-                        });
-                    });
-                </script>
+                <div class="scroll-arrow" onclick="scrollToContent()">
+                    <span class="material-icons">keyboard_arrow_down</span>
+                </div>
             </section>
-        </div>
-    </main>
 
-    <footer>
-        <h1 class="footer-name">AEB - Agência Espacial Brasileira © 2024</h1>
-        <div id="social-links" class="social-links"></div>
-        <section class="footer-gov">   
-            <div>
-                <img src="{{ url_for('static', filename='/images/Logo_PEB_transp.png') }}" alt="Logo PEB" class="PEB">
+            <div class="pastas-container">
+                <div class="pastas-texts">
+                    <p class="text-pasta">Acesse arquivos da AEB</p>
+                    <h1 class="h1-pasta">Pastas Compartilhadas</h1>
+                </div>
+                <section class="pastas" id="pastas">
+                        <div class="cards-container">
+                            {% for folder in folders %}
+                                <a href="{{ url_for('show_folder', folder_name=folder) }}" class="card tilt">
+                                    <div class="foto">
+                                        {% set cover_image = folder_images[folder]['cover_image'] %}
+                                        {% if cover_image != 'default/default.png' %}
+                                            {% set cover_image_path = url_for('static', filename='uploads/' + folder + '/' + cover_image) %}
+                                        {% else %}
+                                            {% set cover_image_path = url_for('static', filename=cover_image) %}
+                                        {% endif %}
+                                        <img src="{{ cover_image_path }}" alt="Capa do Card">
+                                        <p>{{ folder }}</p>
+                                    </div>
+                                </a>
+                            {% endfor %}                    
+                        </div>
+                    <script src="/static/js/vanilla-tilt.js"></script>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            VanillaTilt.init(document.querySelectorAll('.tilt'), {
+                                max: 15,
+                                speed: 500
+                            });
+                        });
+                    </script>
+                </section>
             </div>
-            <div>
-                <img src="{{ url_for('static', filename='/images/logo-original.png') }}" alt="Logo AEB" class="AEB">
-            </div>
-            <div>
-                <img src="{{ url_for('static', filename='/images/MCTI.png') }}" alt="Logo MCTI" class="MCTI">
-            </div>
-            <div>
-                <img src="{{ url_for('static', filename='/images/GOVBR.png') }}" alt="Logo GOVBR" class="GOVBR">
-            </div>
-        </section>
+        </main>
+
+        <footer>
+            <h1 class="footer-name">AEB - Agência Espacial Brasileira © 2024</h1>
+            <div id="social-links" class="social-links"></div>
+            <section class="footer-gov">   
+                <div>
+                    <img src="{{ url_for('static', filename='/images/Logo_PEB_transp.png') }}" alt="Logo PEB" class="PEB">
+                </div>
+                <div>
+                    <img src="{{ url_for('static', filename='/images/logo-original.png') }}" alt="Logo AEB" class="AEB">
+                </div>
+                <div>
+                    <img src="{{ url_for('static', filename='/images/MCTI.png') }}" alt="Logo MCTI" class="MCTI">
+                </div>
+                <div>
+                    <img src="{{ url_for('static', filename='/images/GOVBR.png') }}" alt="Logo GOVBR" class="GOVBR">
+                </div>
+            </section>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Obtém o elemento do rodapé
+                    const footer = document.getElementById('social-links');
+        
+                    // Array de objetos representando as redes sociais e seus links
+                    const socialMediaLinks = [
+                        { name: 'Facebook', url: 'https://www.facebook.com/agenciaespacialbrasileira/' },
+                        { name: 'LinkedIn', url: 'https://br.linkedin.com/company/agencia-espacial-brasileira-oficial' },
+                        { name: 'Instagram', url: 'https://www.instagram.com/agenciaespacialbrasileira/' }
+                    ];
+        
+                    // Adiciona os links ao rodapé
+                    socialMediaLinks.forEach(link => {
+                        const anchor = document.createElement('a');
+                        anchor.href = link.url;
+                        anchor.target = '_blank';
+                        anchor.innerText = link.name;
+                        footer.appendChild(anchor);
+                    });
+                });
+            </script>
+        </footer>
+
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Obtém o elemento do rodapé
-                const footer = document.getElementById('social-links');
-    
-                // Array de objetos representando as redes sociais e seus links
-                const socialMediaLinks = [
-                    { name: 'Facebook', url: 'https://www.facebook.com/agenciaespacialbrasileira/' },
-                    { name: 'LinkedIn', url: 'https://br.linkedin.com/company/agencia-espacial-brasileira-oficial' },
-                    { name: 'Instagram', url: 'https://www.instagram.com/agenciaespacialbrasileira/' }
-                ];
-    
-                // Adiciona os links ao rodapé
-                socialMediaLinks.forEach(link => {
-                    const anchor = document.createElement('a');
-                    anchor.href = link.url;
-                    anchor.target = '_blank';
-                    anchor.innerText = link.name;
-                    footer.appendChild(anchor);
+            $(document).ready(function () {
+                $("#menu-icon").click(function () {
+                    const sidebar = $("#sidebar");
+                    const menuIcon = $("#menu-icon span");
+
+                    if (sidebar.width() === 300) {
+                        sidebar.animate({ width: "0" }, 500);
+                        menuIcon.removeClass("rotate");
+                        setTimeout(function () {
+                            menuIcon.text("menu");
+                        }, 250);
+                    } else {
+                        sidebar.animate({ width: "300px" }, 500);
+                        menuIcon.addClass("rotate");
+                        setTimeout(function () {
+                            menuIcon.text("clear");
+                        }, 250);
+                    }
+                });
+
+                // Fechar o menu ao clicar fora dele
+                $(document).click(function (event) {
+                    const sidebar = $("#sidebar");
+                    const menuIcon = $("#menu-icon span");
+
+                    if (!sidebar.is(event.target) && sidebar.has(event.target).length === 0 &&
+                        !menuIcon.is(event.target) && menuIcon.has(event.target).length === 0) {
+                        sidebar.animate({ width: "0" }, 500);
+                        menuIcon.removeClass("rotate");
+                        setTimeout(function () {
+                            menuIcon.text("menu");
+                        }, 250);
+                    }
+                });
+            });
+
+            $(document).ready(function () {
+                // Função para verificar se a seta deve ser exibida
+                function checkArrowVisibility() {
+                    const carrosselSection = $("#carrossel");
+                    const scrollArrow = $(".scroll-arrow");
+
+                    const isScrolledIntoView = (elem) => {
+                        const docViewTop = $(window).scrollTop();
+                        const docViewBottom = docViewTop + $(window).height();
+                        const elemTop = $(elem).offset().top;
+                        const elemBottom = elemTop + $(elem).height();
+                        return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+                    };
+
+                    // Se a seção do carrossel estiver visível, mostra a seta, caso contrário, oculta.
+                    if (isScrolledIntoView(carrosselSection)) {
+                        scrollArrow.show();
+                    } else {
+                        scrollArrow.hide();
+                    }
+                }
+
+                // Chame a função na inicialização e em eventos de rolagem
+                checkArrowVisibility();
+
+                // Atualize a visibilidade da seta quando a página for rolada
+                $(window).scroll(function () {
+                    checkArrowVisibility();
+                });
+
+                // Role a página até o conteúdo ao clicar na seta
+                $(".scroll-arrow").click(function () {
+                    const targetSection = $(".pastas");  // Substitua pelo seletor do destino desejado
+                    $("html, body").animate({ scrollTop: targetSection.offset().top }, 1000);
                 });
             });
         </script>
-    </footer>
+    </div>
 
-    <script>
-
-
-
-        $(document).ready(function () {
-            $("#menu-icon").click(function () {
-                const sidebar = $("#sidebar");
-                const menuIcon = $("#menu-icon span");
-
-                if (sidebar.width() === 300) {
-                    sidebar.animate({ width: "0" }, 500);
-                    menuIcon.removeClass("rotate");
-                    setTimeout(function () {
-                        menuIcon.text("menu");
-                    }, 250);
-                } else {
-                    sidebar.animate({ width: "300px" }, 500);
-                    menuIcon.addClass("rotate");
-                    setTimeout(function () {
-                        menuIcon.text("clear");
-                    }, 250);
-                }
-            });
-
-            // Fechar o menu ao clicar fora dele
-            $(document).click(function (event) {
-                const sidebar = $("#sidebar");
-                const menuIcon = $("#menu-icon span");
-
-                if (!sidebar.is(event.target) && sidebar.has(event.target).length === 0 &&
-                    !menuIcon.is(event.target) && menuIcon.has(event.target).length === 0) {
-                    sidebar.animate({ width: "0" }, 500);
-                    menuIcon.removeClass("rotate");
-                    setTimeout(function () {
-                        menuIcon.text("menu");
-                    }, 250);
-                }
-            });
-        });
-
-        $(document).ready(function () {
-            // Função para verificar se a seta deve ser exibida
-            function checkArrowVisibility() {
-                const carrosselSection = $("#carrossel");
-                const scrollArrow = $(".scroll-arrow");
-
-                const isScrolledIntoView = (elem) => {
-                    const docViewTop = $(window).scrollTop();
-                    const docViewBottom = docViewTop + $(window).height();
-                    const elemTop = $(elem).offset().top;
-                    const elemBottom = elemTop + $(elem).height();
-                    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-                };
-
-                // Se a seção do carrossel estiver visível, mostra a seta, caso contrário, oculta.
-                if (isScrolledIntoView(carrosselSection)) {
-                    scrollArrow.show();
-                } else {
-                    scrollArrow.hide();
-                }
-            }
-
-            // Chame a função na inicialização e em eventos de rolagem
-            checkArrowVisibility();
-
-            // Atualize a visibilidade da seta quando a página for rolada
-            $(window).scroll(function () {
-                checkArrowVisibility();
-            });
-
-            // Role a página até o conteúdo ao clicar na seta
-            $(".scroll-arrow").click(function () {
-                const targetSection = $(".pastas");  // Substitua pelo seletor do destino desejado
-                $("html, body").animate({ scrollTop: targetSection.offset().top }, 1000);
-            });
-        });
-    </script>
-    
+    <script src="{{ url_for('static', filename='js/stars.js') }}"></script>
+      
 </body>
 </html>

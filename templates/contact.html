@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tilt.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/space_background.css') }}">
     <title>Documentos</title>
 
     <style>
@@ -43,6 +44,8 @@
 </head>
 
 <body>
+    <div class="stars-container"></div>
+    <div class="wave">
     <header>
         <div class="logo-container">
             <!-- <img src="{{ url_for('static', filename='images/logo-original.png') }}" alt="Logo" class="logo"> -->
@@ -148,5 +151,7 @@
     </footer>
     
 
+    
+    <script src="{{ url_for('static', filename='js/stars.js') }}"></script>
 </body>
 </html>

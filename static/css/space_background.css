@@ -1,0 +1,57 @@
+body, html {
+    height: 100%;
+    overflow-x: hidden;
+    margin: 0;
+}
+
+body {
+    --color1: #10092a;
+    --color2: #000000; 
+    background: linear-gradient(-45deg, var(--color1), var(--color2));
+    background-size: 400% 400%;
+    position: relative;
+    animation: GradientBackground 15s ease infinite;
+}
+
+@keyframes GradientBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* STARS */
+
+.stars-container {
+    position: fixed; /* Fica fixo na tela, independente do scroll */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Garante que o container fique atrás de todo o conteúdo */
+    pointer-events: none; /* Previne que o container interfira com cliques no conteúdo sobre ele */
+  }
+  
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 2s infinite alternate;
+  }
+  
+  @keyframes twinkle {
+    0%, 100% {
+      opacity: 0.2;
+    }
+    50% {
+      opacity: 1;
+    }
+  }

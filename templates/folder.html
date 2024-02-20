@@ -1,28 +1,86 @@
-<!-- Atualizado folder.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imagens na Pasta - {{ folder_name }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>AEBFiles - {{ folder_name }}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/folder.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/space_background.css') }}">
 </head>
 <body>
-    <h1>Imagens na Pasta - {{ folder_name }}</h1>
+    <div class="wave">
+        <header>
+            <div class="logo-container">
+                <a href="{{ url_for('publicIndex') }}" class="logo">AEB Files</a>
+            </div>
 
-    <a href="{{ url_for('publicIndex') }}">Voltar para a página inicial</a>
+            <nav class="navbar">
+                <a href="{{ url_for('publicIndex') }}" class="navbar-item">Home</a>
+                <a href="{{ url_for('news') }}" class="navbar-item">Notícias</a>
+                <a href="{{ url_for('contact') }}" class="navbar-item">Contatos</a>
+                <a href="{{ url_for('about') }}" class="navbar-item">Sobre</a>
+            </nav>
+            <div class="login_margin">
+                <a href="{{ url_for('login') }}" class="navbar-item_2">Login</a>
+            </div>
+            
+        </header>
 
-    <h2>Imagens:</h2>
-
-    {% if images %}
-        <div class="image-container">
-            {% for image in images %}
-                <img src="{{ url_for('view_image', folder_name=folder_name, image_name=image) }}" alt="{{ image }}">
-            {% endfor %}
+        <div class="gallery">
+            {% if images %}
+                {% for image in images %}
+                    <div class="photo">
+                        <img src="{{ url_for('view_image', folder_name=folder_name, image_name=image) }}" alt="{{ image }}">
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Nenhuma imagem nesta pasta.</p>
+            {% endif %}
         </div>
-    {% else %}
-        <p>Nenhuma imagem nesta pasta.</p>
-    {% endif %}
+
+        <footer style="display: none;">
+            <h1 class="footer-name">AEB - Agência Espacial Brasileira © 2024</h1>
+            <div id="social-links" class="social-links"></div>
+            <section class="footer-gov">   
+                <div>
+                    <img src="{{ url_for('static', filename='/images/Logo_PEB_transp.png') }}" alt="Logo PEB" class="PEB">
+                </div>
+                <div>
+                    <img src="{{ url_for('static', filename='/images/logo-original.png') }}" alt="Logo AEB" class="AEB">
+                </div>
+                <div>
+                    <img src="{{ url_for('static', filename='/images/MCTI.png') }}" alt="Logo MCTI" class="MCTI">
+                </div>
+                <div>
+                    <img src="{{ url_for('static', filename='/images/GOVBR.png') }}" alt="Logo GOVBR" class="GOVBR">
+                </div>
+            </section>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // Obtém o elemento do rodapé
+                    const footer = document.getElementById('social-links');
+        
+                    // Array de objetos representando as redes sociais e seus links
+                    const socialMediaLinks = [
+                        { name: 'Facebook', url: 'https://www.facebook.com/agenciaespacialbrasileira/' },
+                        { name: 'LinkedIn', url: 'https://br.linkedin.com/company/agencia-espacial-brasileira-oficial' },
+                        { name: 'Instagram', url: 'https://www.instagram.com/agenciaespacialbrasileira/' }
+                    ];
+        
+                    // Adiciona os links ao rodapé
+                    socialMediaLinks.forEach(link => {
+                        const anchor = document.createElement('a');
+                        anchor.href = link.url;
+                        anchor.target = '_blank';
+                        anchor.innerText = link.name;
+                        footer.appendChild(anchor);
+                    });
+                });
+            </script>
+        </footer>      
+    </div>
 </body>
 </html>

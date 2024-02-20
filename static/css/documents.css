@@ -1,9 +1,11 @@
+/* 
+
+NÃO ADICIONAR IMAGENS OU CORES DE FUNDO!!!
+
+*/
+
 body {
     font-family: 'Orbitron', sans-serif;
-    background: url('/static/images/nebula_brilho_reduzido.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 ul {

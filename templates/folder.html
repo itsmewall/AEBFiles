@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/space_background.css') }}">
 </head>
 <body>
+    <div class="stars-container"></div>
     <div class="wave">
+        
         <header>
             <div class="logo-container">
                 <a href="{{ url_for('publicIndex') }}" class="logo">AEB Files</a>
@@ -82,5 +84,6 @@
             </script>
         </footer>      
     </div>
+    <script src="{{ url_for('static', filename='js/stars.js') }}"></script>
 </body>
 </html>

@@ -8,8 +8,7 @@
     <title>Login</title>
     <link rel="icon" href="{{ url_for('static', filename='images/logo_aeb.jpg') }}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/login.css') }}">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
@@ -24,9 +23,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/tilt.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/documents.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/space_background.css') }}">
 </head>
 
 <body>
+    <div class="stars-container"></div>
+    <div class="wave">
+        
     <section class="split-section">
         <div class="login-section">
             <div class="login-box">
@@ -34,7 +37,7 @@
                     <br><h2>Faça o Login</h2><br>
 
                     <div class="wrap-input">
-                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
                         <input class="input-form" type="text" name="username" autocomplete="off" id="username">
                         <span class="focus-input-form" data-placeholder="Usuário"></span>
                     </div>
@@ -55,6 +58,7 @@
             </div>
         </div>
     </section>
+
     {% if error_message %}
     <script>
         window.onload = function () {
@@ -68,52 +72,10 @@
     </script>
     {% endif %}
 
-    <script>
-        document.querySelector('.back-form-btn').addEventListener('click', function(event) {
-            event.preventDefault();
-            window.location.href = 'http://127.0.0.1:5000/';
-        });
-    </script>
-
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
-    <script>
-        // Função para exibir a mensagem de erro
-        function showErrorPopup(message) {
-            const popup = document.getElementById('error-popup');
-            popup.innerText = message;
-            popup.style.display = 'block';
-
-            // Automatically hide the error message after a few seconds (adjust the timeout value as needed)
-            setTimeout(() => {
-                popup.style.display = 'none';
-            }, 3000); // Hide after 3 seconds (adjust as needed)
-        }
-
-        // Verifique se a URL atual possui o parâmetro de erro
-        const urlParams = new URLSearchParams(window.location.search);
-        const erro = urlParams.get('erro');
-
-        // Verifique se há um parâmetro de erro e exiba a mensagem de erro correspondente
-        if (erro === 'credenciais_invalidas') {
-            exibirMensagemErro();
-        }
-    </script>
-
-    <script>
-        let inputs = document.getElementsByClassName("input-form");
-        for (let input of inputs) {
-            input.addEventListener("blur", function () {
-                if (input.value.trim() != "") {
-                    input.classList.add("has-val");
-                } else {
-                    input.classList.remove("has-val");
-                }
-            });
-        }
-    </script>
-    <script src="{{ static_file }}"></script>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/stars.js') }}"></script>
 </body>
 
 </html>

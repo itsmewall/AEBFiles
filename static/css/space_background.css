@@ -5,7 +5,7 @@ body, html {
 }
 
 body {
-    --color1: #10092a;
+    --color1: #000b3b;
     --color2: #000000; 
     background: linear-gradient(-45deg, var(--color1), var(--color2));
     background-size: 400% 400%;

@@ -1,164 +1,152 @@
-/* 
+/* Estilos adicionais */
+:root {
+    --text-color: rgba(255, 255, 255, 0.8);
+}
 
-NÃO ADICIONAR IMAGENS OU CORES DE FUNDO!!!
-
-*/
-
-
-body {
-    font-family: 'Arial', sans-serif;
+* {
     margin: 0;
     padding: 0;
-    color: #E0E1DD; /* Cor clara para o texto, para contraste */
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Helvetica', sans-serif;
+    color: var(--text-color); 
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Impede a barra de rolagem horizontal */
 }
 
 header {
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    color: #ffffff;
+    padding: 20px;
     text-align: center;
-    padding: 20px 10px;
 }
-
 main {
     padding: 20px;
-}
-
-a {
-    color: #4D9DE0; /* Cor azul suave para links */
-    text-decoration: none;
-}
-
-.card {
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 1rem;
-    margin: 2rem;
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-    width: calc(100% - 4rem);
-    display: flex;
-    align-items: center;
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-.card-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 20px; /* Assegura espaço consistente entre os cartões */
+    justify-content: center;
 }
 
-.full-width-card {
-    background-color: rgba(13, 27, 42, 0.9);
-    border-radius: 8px;
+/* Cards */
+.card {
+    background-color: #2E2E2E; /* Cor de fundo dos cartões */
     padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px auto; /* Centraliza o cartão */
-    width: 90%; /* Largura adaptativa com padding */
+    border-radius: 10px;
+    margin: 0 10px 20px; /* Margem adicionada nos lados para espaçamento */
+    width: 300px; /* Largura fixa para os cards */
+    box-sizing: border-box;
+    text-decoration: none;
+    overflow: hidden; /* Esconde o conteúdo que ultrapassar o cartão */
+    position: relative; /* Posição relativa para permitir sobreposição */
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.card::before {
+    content: ''; /* Cria um pseudo-elemento */
+    position: absolute; /* Posição absoluta em relação ao card */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(114, 114, 114, 0.5); /* Cor de fundo com transparência */
+    filter: blur(10px); /* Desfoque aplicado */
+    z-index: -1; /* Coloca o pseudo-elemento abaixo do conteúdo do card */
+    border-radius: 10px; /* Mesmo raio de borda que o cartão */
+}
+
+.card:hover::before {
+    filter: blur(0); /* Remove o desfoque ao passar o mouse */
+}
+
+.card:nth-child(-n+3) {
+    margin-bottom: 20px; /* Adiciona margem inferior apenas aos três primeiros cards */
 }
 
 label {
-    color: #ffffff; /* Assegura visibilidade sobre fundos escuros */
-}
-
-input, select, textarea, button {
-    border-radius: 4px;
-    padding: 10px;
-    border: 1px solid #7F8C8D; /* Bordas sutis para os campos de entrada */
-}
-
-button {
-    background-color: #1B263B; /* Botão escuro para contraste */
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #4D9DE0; /* Transição para cor azul ao passar o mouse */
-}
-
-a.card {
     display: block;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 20px;
-    margin-top: 10px;
-    text-align: center;
-    text-decoration: none;
-    color: #025E96;
-    transition: background-color 0.3s ease;
+    margin-bottom: 5px;
+    color: var(--text-color); 
+    font-size: 16px;
+    font-weight: bold;
 }
-
-a.card:hover {
-    background-color: #f0f0f0;
+input[type="text"],
+input[type="file"],
+textarea,
+button,
+select {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    background-color: #3E3E3E; /* Cor de fundo dos campos de entrada */
+    color: var(--text-color); 
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Helvetica', sans-serif;
 }
-
-.lanterna {
-    margin-top: 20px;
+button {
+    cursor: pointer;
+    background-color: #007AFF; /* Cor de destaque para botões */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+select {
+    appearance: none; /* Remove o estilo padrão do sistema */
+    -webkit-appearance: none; /* Para o Safari */
+    -moz-appearance: none; /* Para o Firefox */
+    padding-right: 30px; /* Adiciona espaço para a seta do seletor */
+}
+.checkbox {
     display: flex;
     align-items: center;
-    flex: 1; /* Adicione esta linha para ocupar o espaço disponível na mesma linha */
+    color: var(--text-color); 
+    font-size: 16px;
 }
-
-.lanterna label {
+.checkbox input[type="checkbox"] {
     margin-right: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 1em;
 }
 
-/* Estilo para o Toggle Button (Permitir Downloads) */
-.toggle-button {
-    display: flex; /* Adicione esta linha para colocar o label e o input na mesma linha */
-    align-items: center; /* Adicione esta linha para centralizar verticalmente */
-    margin-top: auto;
+.folders {
+    width: 100%; /* Garante que a seção de pastas ocupe toda a largura */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px; /* Espaçamento entre as pastas */
 }
 
-.toggle-button input {
+.folders a h2 {
+    color: var(--text-color); 
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.folder-card {
+    background-color: #2E2E2E; /* Cor de fundo dos cartões de pasta */
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px; /* Largura fixa para os cartões de pasta */
+    box-sizing: border-box;
+    overflow: hidden; /* Esconde o conteúdo que ultrapassar o cartão */
+}
+
+.folder-card h2 {
+    margin-bottom: 10px;
+}
+
+.folder-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.folder-gallery img {
+    width: calc(50% - 5px);
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+/* Limita a exibição a no máximo 4 imagens dentro do cartão */
+.folder-gallery img:nth-child(n+5) {
     display: none;
-}
-
-.toggle-button label {
-    position: relative;
-    background-color: rgb(187, 187, 187);
-    width: 60px;
-    height: 30px;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.toggle-button label:before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    width: 24px;
-    height: 24px;
-    background-color: #fff;
-    border-radius: 50%;
-    transform: translateY(-50%);
-    transition: 0.3s;
-}
-
-.toggle-button input:checked + label {
-    background-color: green;
-}
-
-.toggle-button input:checked + label:before {
-    left: calc(100% - 29px);
-    transform: translateY(-50%);
 }

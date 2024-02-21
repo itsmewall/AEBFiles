@@ -10,27 +10,21 @@
     <!-- Adicione aqui seus links para folhas de estilo, scripts, etc. -->
 </head>
 <body>
-
     <div class="stars-container"></div>
     <div class="wave">
 
-<!-- 1. Header -->
-<header>
-    <h1>AEB Files</h1>
-    <p>Olá, {{ ldap_username.split()[0] }}!</p>
-</header>
+    <header>
+        <h1>AEB Files</h1>
+        <p>Olá, {{ ldap_username.split()[0] }}!</p>
+    </header>
 
-<!-- 2. Main Content -->
-<main>
-    <!-- 2.1 Cards -->
-    <div class="card-container">
-        <!-- Card 1: Criar Pasta -->
+    <main>
+
         <div class="card">
             <form action="/create_folder" method="post" autocomplete="off">
                 <label for="folderName">Nome da Pasta:</label>
                 <input type="text" id="folderName" name="folder_name" required>        
-        
-                <!-- Adicionando o toggle switch para permitir downloads -->
+
                 <div class="lanterna">
                     <label for="allowDownloads">Permitir Downloads:</label>
                     <div class="toggle-button">
@@ -39,18 +33,15 @@
                     </div>
                 </div>
         
-                <!-- Adicionando campo para informações sobre a pasta -->
                 <label for="folderInfo">Informações sobre a Pasta:</label>
                 <textarea id="folderInfo" name="folderInfo" maxlength="500"></textarea>
         
                 <button type="submit">Criar Pasta</button>
             </form>
-        </div>        
-    
-      <!-- Card 2: Upload de Arquivos -->
+        </div>
+
         <div class="card">
             <form action="/upload" method="post" enctype="multipart/form-data">
-                <!-- Campos existentes -->
                 <label for="file">Selecione um arquivo:</label>
                 <input type="file" id="file" name="file" accept="*/*" required>
                 <label for="folder">Selecione a pasta:</label>
@@ -59,7 +50,6 @@
                         <option value="{{ folder }}">{{ folder }}</option>
                     {% endfor %}
                 </select>
-                <!-- Novo campo para definir como imagem de capa -->
                 <div class="checkbox">
                     <input type="checkbox" id="setAsCover" name="setAsCover">
                     <label for="setAsCover">Definir como imagem de capa da pasta</label>
@@ -68,11 +58,8 @@
             </form>
         </div>
 
-
-        <!-- Card 3: Informações do Arquivo -->
         <div class="card">
             <form action="/file_info" method="post">
-                <!-- Adicione os campos necessários para as informações do arquivo -->
                 <label for="title">Título do Arquivo:</label>
                 <input type="text" id="title" name="title">
                 <label for="info">Informações do Arquivo:</label>
@@ -89,17 +76,34 @@
                 <button type="submit">Salvar Informações</button>
             </form>
         </div>
-    </div>
 
-    <!-- Card 4: Pastas -->
-    <div class="full-width-card">
-        {% for folder in folders %}
-            <a href="{{ url_for('show_folder', folder_name=folder) }}" class="card">{{ folder }}</a>
-        {% endfor %}
-    </div>
-</main>
+        <!-- Cards de pastas -->
+        <section class="folders" id="folders">
+            {% for folder in folders %}
+            <a href="{{ url_for('show_folder', folder_name=folder) }}" class="card">
+                <h2>{{ folder }}</h2>
+                <div class="folder-gallery">
+                    {% for image in folder_images[folder]['images'] %}
+                    <img src="{{ url_for('static', filename='uploads/' + folder + '/' + image) }}" alt="Imagem">
+                    {% endfor %}
+                </div>
+            </a>
+            {% endfor %}
+        </section>
 
-<script src="{{ url_for('static', filename='js/stars.js') }}"></script>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/vanilla-tilt.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/stars.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            VanillaTilt.init(document.querySelectorAll('.tilt'), {
+                max: 15,
+                speed: 500
+            });
+        });
+    </script>
 
 </body>
 </html>

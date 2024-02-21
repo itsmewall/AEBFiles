@@ -63,7 +63,7 @@ a {
 .card img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Mantém a proporção e corta a imagem para ajustar ao tamanho do card */
+    object-fit: cover;
 }
 
 .card p {
@@ -74,4 +74,20 @@ a {
     font-size: 15px;
     text-align: center;
     padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .photo {
+        flex-direction: column; /* Redefine a direção do flex para coluna em dispositivos menores */
+        margin-top: 10%;
+    }
+    .card {
+        width: calc(50% - 20px); /* Redefine a largura do card para ocupar 50% da largura da tela em dispositivos menores */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card {
+        width: calc(100% - 20px); /* Redefine a largura do card para ocupar 100% da largura da tela em dispositivos muito pequenos */
+    }
 }

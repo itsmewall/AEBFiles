@@ -15,6 +15,9 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/space_background.css') }}">
         <title>Sobre Nós</title>
     </head>
+
+    <div class="stars-container"></div>
+    <div class="wave">
     
     <header>
         <div class="logo-container">
@@ -53,16 +56,22 @@
 
         <section class="miviva">
             <div class="miviva_2">
-                <h2>Missão</h2>
-                <h3>Coordenar e fortalecer o setor espacial nacional para o desenvolvimento da sociedade</h3>
+                <div class="card-content">
+                    <h2>Missão</h2>
+                    <h3>Coordenar e fortalecer o setor espacial nacional para o desenvolvimento da sociedade</h3>
+                </div>
             </div>
             <div class="miviva_2">
-                <h2>Visão</h2>
-                <h3>Ser a instituição estrategica de Estado Responsavel por conectar aos desafios da sociedade</h3>
+                <div class="card-content">
+                    <h2>Visão</h2>
+                    <h3>Ser a instituição estrategica de Estado Responsavel por conectar aos desafios da sociedade</h3>
+                </div>
             </div>
             <div class="miviva_2">
-                <h2>Valores</h2>
-                <h3>Autonomia<br>Inovação<br>Integridade<br>Sustentabilidade<br>Inclusão</h3>
+                <div class="card-content">
+                    <h2>Valores</h2>
+                    <h3>Autonomia<br>Inovação<br>Integridade<br>Sustentabilidade<br>Inclusão</h3>
+                </div>
             </div>
         </section>
     </main>
@@ -108,6 +117,9 @@
         </script>
     </footer>
     
+    <script src="{{ url_for('static', filename='js/vanilla-tilt.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/stars.js') }}"></script>
+
     <script>
         window.addEventListener('scroll', function() {
             var imagem = document.querySelector('.img_aeb');

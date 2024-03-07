@@ -1,9 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Quando uma imagem é clicada
     document.querySelectorAll('.photo img').forEach(item => {
         item.addEventListener('click', event => {
             const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("img01");
+            const modalImg = document.getElementById("img"); // ID corrigido aqui
             const captionText = document.getElementById("caption");
             const imageInfo = document.getElementById("imageInfo");
             const downloadLink = document.getElementById("downloadLink");

@@ -36,38 +36,74 @@ NÃO ADICIONAR IMAGENS OU CORES DE FUNDO!!!
     }
 }
 
+/* Estilos para o modal */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 2; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    display: none;
+    position: fixed;
+    z-index: 2;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    width: 100%;
+    height: 100vh; /* Define a altura máxima do modal para ocupar toda a tela */
+    overflow: hidden; /* Impede qualquer conteúdo de vazar */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo preto semi-transparente */
+    backdrop-filter: blur(8px); /* Aplica um efeito de desfoque */
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .modal-content {
+}
+
+.modal-content {
     margin: auto;
-    display: block;
-    width: 80%; /* You can adjust this as per your requirement */
-    max-width: 1200px; /* Maximum width */
-    max-height: 80vh; /* Maximum height */
-  }
-  
-  .close {
+    display: flex;
+    flex-direction: column; /* Coloca os itens em coluna */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: white; /* Cor de fundo do conteúdo do modal */
+    border-radius: 10px; /* Borda arredondada */
+    overflow: hidden; /* Impede qualquer conteúdo de vazar */
+    margin-top: 5%; /* Adiciona a margem superior */
+
+    max-width: auto;  
+    max-height: 70vh; 
+    height: 100%;
+}
+
+.close {
     position: absolute;
     top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
+    right: 15px;
+    color: #fff;
+    font-size: 30px;
     cursor: pointer;
-  }
-  
+}
+
+#imageMenu {
+    position: absolute;
+    bottom: 0; /* Distância da parte inferior do modal */
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.9); /* Fundo branco semi-transparente */
+    backdrop-filter: blur(4px); /* Efeito de desfoque */
+    margin-bottom: 0; /* Remove a margem inferior */
+}
+
+#imageInfo {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+#downloadLink {
+    background-color: #007AFF; /* Cor de destaque do iOS */
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#downloadLink:hover {
+    background-color: #0056b3; /* Cor de destaque mais escura no hover */
+}

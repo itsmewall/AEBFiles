@@ -10,25 +10,27 @@ NÃO ADICIONAR IMAGENS OU CORES DE FUNDO!!!
     box-sizing: border-box;
   }
 
-
 .gallery {
-    column-count: 4; /* Ajusta o número de colunas da galeria */
-    column-gap: 10px; /* Espaço entre as colunas */
+    column-count: 4; /* Mantém o número de colunas da galeria */
+    column-gap: 10px; /* Mantém o espaço entre as colunas */
     padding: 20px;
-    margin-top: 100px; /* Ajusta conforme necessário para o cabeçalho */
+    margin-top: 100px; /* Mantém o ajuste conforme necessário para o cabeçalho */
 }
 
 .photo {
-    break-inside: avoid; /* Evita que as fotos sejam divididas entre colunas */
-    margin-bottom: 10px; /* Espaço abaixo de cada foto */
+    break-inside: avoid; /* Mantém para evitar que as fotos sejam divididas entre colunas */
+    margin-bottom: 10px; /* Mantém o espaço abaixo de cada foto */
+    display: inline-block; /* Mantém o alinhamento das fotos */
+    width: 100%; /* Mantém a largura da imagem ajustada à coluna */
 }
 
 .photo img {
-    width: 100%; /* A largura da imagem ajusta-se à coluna */
-    height: auto; /* A altura ajusta-se para manter a proporção da imagem */
-    border-radius: 8px; /* Bordas arredondadas */
-    object-fit: cover; /* Cobre a área do elemento sem distorcer a proporção */
+    width: 100%; /* Mantém a largura da imagem ajustada à coluna */
+    height: auto; /* Mantém a altura automática para manter a proporção da imagem */
+    border-radius: 8px; /* Mantém as bordas arredondadas */
+    object-fit: cover; /* Mantém a cobertura da área do elemento sem distorcer a proporção */
 }
+
 
 @media (max-width: 768px) {
     .gallery {
@@ -106,4 +108,19 @@ NÃO ADICIONAR IMAGENS OU CORES DE FUNDO!!!
 
 #downloadLink:hover {
     background-color: #0056b3; /* Cor de destaque mais escura no hover */
+}
+
+
+@media (max-width: 768px) {
+    .gallery {
+        column-gap: 10px; /* Ajusta o espaço entre as colunas em telas menores */
+    }
+
+    .photo {
+        margin-bottom: 10px; /* Ajusta o espaço abaixo de cada foto em telas menores */
+    }
+
+    .photo:hover img {
+        transform: scale(1.05); /* Um zoom mais sutil em telas menores */
+    }
 }

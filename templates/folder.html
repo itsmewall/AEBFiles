@@ -43,6 +43,18 @@
             {% endif %}
         </div>
 
+        <div id="imageModal" class="modal" style="display: none;">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img">
+            <div id="caption"></div>
+            
+            <div id="imageMenu">
+                <p id="imageInfo">Informações da imagem</p>
+                <a href="" id="downloadLink" download>Download</a>
+            </div>
+        </div>
+        
+
         <footer style="display: none;">
             <h1 class="footer-name">AEB - Agência Espacial Brasileira © 2024</h1>
             <div id="social-links" class="social-links"></div>
@@ -85,5 +97,6 @@
         </footer>      
     </div>
     <script src="{{ url_for('static', filename='js/stars.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/image-modal.js') }}"></script>
 </body>
 </html>

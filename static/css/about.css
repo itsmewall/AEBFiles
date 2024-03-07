@@ -45,28 +45,43 @@ a {
 }
 
 .miviva_2 {
-    padding: 2% 1% 2% 1%;   
-    display: flex;
-    flex-direction: column;
-    margin: 0 3%; 
-    width: 30vw;
-    height: auto; 
-    box-shadow: 0 0 20px rgb(0, 0, 0);
+    position: relative;
+    width: 300px; /* Ajuste conforme necessário */
+    margin: 20px auto; /* Centraliza o card */
     border-radius: 18px;
-    color: #fff; /* Cor do texto claro */
-    background-color: rgba(0, 0, 0, 0.609);
-    backdrop-filter: blur(10%);
+    overflow: hidden; /* Mantém tudo dentro dos limites do card */
+    background-color: transparent; /* Fundo transparente para o card */
+}
+
+.miviva_2::before {
+    content: ''; /* Necessário para pseudo-elementos */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(255, 255, 255); /* Ajuste a transparência aqui */
+    backdrop-filter: blur(10px); /* Efeito de desfoque */
+    -webkit-backdrop-filter: blur(10px); /* Para Safari */
+    z-index: -1; /* Coloca o fundo atrás do conteúdo do card */
+}
+
+.card-content {
+    position: relative; /* Isso assegura que o conteúdo fique acima do fundo */
+    z-index: 1; /* Maior que o z-index do pseudo-elemento ::before */
 }
 
 .miviva_2 h2 {
     margin: 5% 0% 10% 0% ;  
     font-size: 30px;
+    color: blue;
 }
 
 .miviva_2 h3 {
     margin: 0; /* Remove a margem padrão dos parágrafos */
     font-weight: normal;
     font-size: 20px;
+    color: black;
 }
 
 /* Estilos adicionais para melhorar a aparência */

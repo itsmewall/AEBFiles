@@ -10,34 +10,117 @@ NÃO ADICIONAR IMAGENS OU CORES DE FUNDO!!!
     box-sizing: border-box;
   }
 
-
 .gallery {
-    margin-top: 5%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px; /* Espaçamento entre as imagens */
-    position: relative;
-    z-index: 1; /* Para ficar acima do fundo */
+    column-count: 4; /* Mantém o número de colunas da galeria */
+    column-gap: 10px; /* Mantém o espaço entre as colunas */
+    padding: 20px;
+    margin-top: 100px; /* Mantém o ajuste conforme necessário para o cabeçalho */
 }
 
 .photo {
-    width: 200px; /* Define a largura das imagens */
-    height: 200px; /* Define a altura das imagens */
-    overflow: hidden; /* Oculta qualquer parte da imagem que ultrapasse o contêiner */
-    border-radius: 10px; /* Adiciona bordas arredondadas */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil para destacar as imagens */
-    transition: transform 0.3s ease; /* Transição suave para a propriedade transform */
-}
-
-.photo:hover {
-    transform: scale(1.1); /* Escala a imagem em 110% quando o mouse passa sobre ela */
+    break-inside: avoid; /* Mantém para evitar que as fotos sejam divididas entre colunas */
+    margin-bottom: 10px; /* Mantém o espaço abaixo de cada foto */
+    display: inline-block; /* Mantém o alinhamento das fotos */
+    width: 100%; /* Mantém a largura da imagem ajustada à coluna */
 }
 
 .photo img {
+    width: 100%; /* Mantém a largura da imagem ajustada à coluna */
+    height: auto; /* Mantém a altura automática para manter a proporção da imagem */
+    border-radius: 8px; /* Mantém as bordas arredondadas */
+    object-fit: cover; /* Mantém a cobertura da área do elemento sem distorcer a proporção */
+}
+
+
+@media (max-width: 768px) {
+    .gallery {
+        column-count: 2; /* Reduz o número de colunas para telas menores */
+    }
+}
+
+/* Estilos para o modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
     width: 100%;
+    height: 100vh; /* Define a altura máxima do modal para ocupar toda a tela */
+    overflow: hidden; /* Impede qualquer conteúdo de vazar */
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo preto semi-transparente */
+    backdrop-filter: blur(8px); /* Aplica um efeito de desfoque */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    margin: auto;
+    display: flex;
+    flex-direction: column; /* Coloca os itens em coluna */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-color: white; /* Cor de fundo do conteúdo do modal */
+    border-radius: 10px; /* Borda arredondada */
+    overflow: hidden; /* Impede qualquer conteúdo de vazar */
+    margin-top: 5%; /* Adiciona a margem superior */
+
+    max-width: auto;  
+    max-height: 70vh; 
     height: 100%;
-    object-fit: cover; /* Redimensiona a imagem para preencher o contêiner mantendo a proporção */
-    display: block; /* Garante que a imagem não tenha espaços em branco indesejados */
-    border-radius: 10px; /* Adiciona bordas arredondadas */
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#imageMenu {
+    position: absolute;
+    bottom: 0; /* Distância da parte inferior do modal */
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    background-color: rgba(0, 0, 0, 0.9); /* Fundo branco semi-transparente */
+    backdrop-filter: blur(4px); /* Efeito de desfoque */
+    margin-bottom: 0; /* Remove a margem inferior */
+}
+
+#imageInfo {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+#downloadLink {
+    background-color: #007AFF; /* Cor de destaque do iOS */
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#downloadLink:hover {
+    background-color: #0056b3; /* Cor de destaque mais escura no hover */
+}
+
+
+@media (max-width: 768px) {
+    .gallery {
+        column-gap: 10px; /* Ajusta o espaço entre as colunas em telas menores */
+    }
+
+    .photo {
+        margin-bottom: 10px; /* Ajusta o espaço abaixo de cada foto em telas menores */
+    }
+
+    .photo:hover img {
+        transform: scale(1.05); /* Um zoom mais sutil em telas menores */
+    }
 }

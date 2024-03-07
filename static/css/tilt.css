@@ -1,13 +1,9 @@
-
 .tilt {
     perspective: 1000px;
 }
 
 .tilt:hover {
-    transform: scale(1.5) rotateX(20deg) rotateY(15deg); 
-    transition: transform 3s ease; 
-}
-a {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
+    transform: scale(1.03) rotateX(20deg) rotateY(15deg);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    box-shadow: 0 5px 10px rgba(101, 101, 101, 0.4);
 }

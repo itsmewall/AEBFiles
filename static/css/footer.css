@@ -11,45 +11,123 @@ footer {
 footer h1 {
     font-family: 'Orbitron', sans-serif;
     font-weight: bold;
-    font-size: 10px; /* Ajuste o tamanho da fonte conforme necessário */
     text-transform: uppercase;
     margin-top: 10px; /* Ajuste o valor conforme necessário */
     color: white; /* Adicione a cor do texto */
 }
 
-footer .social-links {
-    margin-top: 20px;
+
+@media only screen and (min-width: 1025px) {
+    footer h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        font-size: 20px; /* Ajuste o tamanho da fonte conforme necessário */
+        text-transform: uppercase;
+        margin-top: 5px; /* Ajuste o valor conforme necessário */
+        color: white; /* Adicione a cor do texto */
+    }
+    
+    footer .social-links {
+        margin-top: 20px;
+    }
+    
+    footer a {
+        color: white;
+        margin: 0% 1% 0 1%;
+        text-decoration: none;
+        font-size: 20px;
+    }
+    
+    
+    .footer-gov {
+        display: flex;
+        width: 100%;
+        height: auto;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+    
+
+    .footer-gov .assinaturas{
+        margin-top: 10px;
+        width: 65%;
+    }
 }
 
-footer a {
-    color: white;
-    margin: 0 1%;
-    text-decoration: none;
-    font-size: 10px;
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    footer h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        font-size: 20px; /* Ajuste o tamanho da fonte conforme necessário */
+        text-transform: uppercase;
+        margin-top: 5px; /* Ajuste o valor conforme necessário */
+        color: white; /* Adicione a cor do texto */
+    }
+    
+    footer .social-links {
+        margin-top: 20px;
+    }
+    
+    footer a {
+        color: white;
+        margin: 0% 1% 0 1%;
+        text-decoration: none;
+        font-size: 20px;
+    }
+    
+    
+    .footer-gov {
+        display: flex;
+        width: 100%;
+        height: auto;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+    
+
+    .footer-gov .assinaturas{
+        margin-top: 10px;
+        width: 99%;
+    }
 }
 
+@media only screen and (max-width: 600px) {
+    
+    footer h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-weight: bold;
+        font-size: 10px; /* Ajuste o tamanho da fonte conforme necessário */
+        text-transform: uppercase;
+        margin-top: 5px; /* Ajuste o valor conforme necessário */
+        color: white; /* Adicione a cor do texto */
+    }
+    
+    footer .social-links {
+        margin-top: 20px;
+    }
+    
+    footer a {
+        color: white;
+        margin: 0% 1% 0 1%;
+        text-decoration: none;
+        font-size: 10px;
+    }
+    
+    
+    .footer-gov {
+        display: flex;
+        width: 100%;
+        height: auto;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+    
 
-.footer-gov {
-    display: flex;
-    width: 100%;
-    height: auto;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-}
-
-
-
-.footer-gov .assinaturas{
-    width: 100%;
-}
-.footer-gov .AEB{
-    width: 70%;
-    margin-right: -30px;
-}
-.footer-gov .MCTI{
-    width: 80%;
-}
-.footer-gov .GOVBR{
-    width: 100%;
+    .footer-gov .assinaturas{
+        margin-top: 10px;
+        width: 100%;
+    }
 }

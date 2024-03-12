@@ -1,5 +1,5 @@
 header {
-    position: absolute;
+    position: relative;
     top: 0;
     width: 100%;
     z-index: 2;
@@ -24,6 +24,17 @@ header {
 
 
 
+
+@media only screen and (min-width: 1025px) {
+    
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    
+}
+
+@media only screen and (max-width: 600px) {
+    
 .menu-icon {
     transition: visibility 0.5s, opacity 0.5s;
     cursor: pointer;
@@ -134,4 +145,5 @@ header {
 .menu-icon.open span:nth-child(2) {
     transform: rotate(-45deg) translate(0, -1px);
 }
-
+    
+}

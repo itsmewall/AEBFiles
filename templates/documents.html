@@ -120,7 +120,37 @@
         </div>
         
     </main>
-
+    <footer>
+        <h1 class="footer-name">AEB - Agência Espacial Brasileira © 2024</h1>
+        <div id="social-links" class="social-links"></div>
+        <section class="footer-gov">   
+            <div class="box_img">
+                <img src="{{ url_for('static', filename='/images/assinatur_gov.png') }}" alt="assinaturas" class="assinaturas">
+            </div>
+        </section>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Obtém o elemento do rodapé
+                const footer = document.getElementById('social-links');
+    
+                // Array de objetos representando as redes sociais e seus links
+                const socialMediaLinks = [
+                    { name: 'Facebook', url: 'https://www.facebook.com/agenciaespacialbrasileira/' },
+                    { name: 'LinkedIn', url: 'https://br.linkedin.com/company/agencia-espacial-brasileira-oficial' },
+                    { name: 'Instagram', url: 'https://www.instagram.com/agenciaespacialbrasileira/' }
+                ];
+    
+                // Adiciona os links ao rodapé
+                socialMediaLinks.forEach(link => {
+                    const anchor = document.createElement('a');
+                    anchor.href = link.url;
+                    anchor.target = '_blank';
+                    anchor.innerText = link.name;
+                    footer.appendChild(anchor);
+                });
+            });
+        </script>
+    </footer>
     
     <script>
         $(document).ready(function () {

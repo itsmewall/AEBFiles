@@ -4,12 +4,14 @@ footer {
     text-align: center;
     z-index: 1;
     margin-top: 20px;
+    bottom: 0;
+    margin-bottom: 0%;
 }
 
 footer h1 {
     font-family: 'Orbitron', sans-serif;
     font-weight: bold;
-    font-size: 14px; /* Ajuste o tamanho da fonte conforme necessário */
+    font-size: 10px; /* Ajuste o tamanho da fonte conforme necessário */
     text-transform: uppercase;
     margin-top: 10px; /* Ajuste o valor conforme necessário */
     color: white; /* Adicione a cor do texto */
@@ -23,32 +25,31 @@ footer a {
     color: white;
     margin: 0 1%;
     text-decoration: none;
+    font-size: 10px;
 }
 
 
 .footer-gov {
     display: flex;
-    width: 50%;
+    width: 100%;
     height: auto;
     align-items: center;
     justify-content: center;
     margin: auto;
 }
 
-.boz_img{
-    width: 100%;
-    height: auto;
-}
+
 
 .footer-gov .PEB{
-    width: 100%;
+    width: 150%;
 }
 .footer-gov .AEB{
-    width: 45%;
+    width: 70%;
+    margin-right: -30px;
 }
 .footer-gov .MCTI{
-    width: 65%;
+    width: 80%;
 }
 .footer-gov .GOVBR{
-    width: 50%;
+    width: 100%;
 }

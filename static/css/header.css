@@ -21,20 +21,6 @@ header {
     margin-top: 0.5%;
 }
 
-
-
-
-
-@media only screen and (min-width: 1025px) {
-    
-}
-
-@media only screen and (min-width: 601px) and (max-width: 1024px) {
-    
-}
-
-@media only screen and (max-width: 600px) {
-    
 .menu-icon {
     transition: visibility 0.5s, opacity 0.5s;
     cursor: pointer;
@@ -145,5 +131,73 @@ header {
 .menu-icon.open span:nth-child(2) {
     transform: rotate(-45deg) translate(0, -1px);
 }
+
+
+
+@media only screen and (min-width: 1025px) {
+    /* Estilos para telas maiores que 1024px (desktop) */
+}
+
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    /* Estilos para telas entre 601px e 1024px (tablet) */
+    .navbar {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+
+    .navbar-item_2,
+    .navbar .navbar-item {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    /* Estilos para telas menores que 600px (celular) */
+    .logo-container {
+        font-family: Orbitron, sans-serif;
+        margin-top: 0.5%;
+        margin-right: 3px;
+    }
     
+    .logo {
+        width: 70px;
+        font-size: 32px;
+    }
+
+    .navbar {
+        margin:10px 0 10px 0;
+    }
+
+    .navbar-item_2,
+    .navbar .navbar-item {
+        font-size: 10px;
+        margin: 0 10px;
+    }
+
+    .logo-container {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    .menu-icon {
+        visibility: visible;
+        opacity: 1;
+        position: absolute;
+        top: 5%;
+    }
+
+    .menu-icon.hide {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .navbar.open {
+        display: flex;
+        z-index: 1;
+        background-color: rgba(245, 244, 244, 0.371);
+        text-align: center;
+        text-transform: uppercase;
+        font-family: Orbitron, sans-serif;
+    }
+
 }
